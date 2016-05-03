@@ -27,31 +27,36 @@ import com.gestionHotel.hilton.entities.Personne;
 public class ImplMetierPersonne {
 
 	/**Association**/
-	InterfDAOPersonne dao = new IpmlDAOPersonne();
+	InterfDAOPersonne daoPers = new IpmlDAOPersonne();
 	
+	
+	public void setDaoPers(InterfDAOPersonne daoPers) {
+		this.daoPers = daoPers;
+	}
+
 	/**Ajouter une personne a la base**/
 	public void addPersonne(Personne p) {
-		dao.addPersonne(p);;
+		daoPers.addPersonne(p);;
 	}
 
 	/**Supprimer une personne de la base avec son Id**/
 	public void deletePersonne(Long idPersonne) {
-		dao.deletePersonne(idPersonne);
+		daoPers.deletePersonne(idPersonne);
 	}
 
 	/**Mettre a jour une personne de la base avec son Id**/
 	public void updatePersonne(Long idPersonne) {
-		dao.updatePersonne(idPersonne);
+		daoPers.updatePersonne(idPersonne);
 	}
 
 	/**Obtenir une personne de la base avec son Id**/
 	public Personne getPersonne(Long idPersonne) {
-		return dao.getPersonne(idPersonne);
+		return daoPers.getPersonne(idPersonne);
 	}
 
 	/**Obtenir toute les personnes possédant dans leur nom ou prenom le mot cle tapez**/
 	public List<Personne> searchPersonne(String mc) {
-		return dao.searchPersonne(mc);
+		return daoPers.searchPersonne(mc);
 	}
 
 }

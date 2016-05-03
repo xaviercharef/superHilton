@@ -77,103 +77,46 @@ public class Reservation implements Serializable{
 
 
 	/** Getters and Setters **/
-	
-
-
 	public Long getIdReservation() {
 		return idReservation;
 	}
-
-
-
-
 	public void setIdReservation(Long idReservation) {
 		this.idReservation = idReservation;
 	}
-
-
-
-
 	public Date getDateDebut() {
 		return dateDebut;
 	}
-
-
-
-
 	public void setDateDebut(Date dateDebut) {
 		this.dateDebut = dateDebut;
 	}
-
-
-
-
 	public Date getDateFin() {
 		return dateFin;
 	}
-
-
-
-
 	public void setDateFin(Date dateFin) {
 		this.dateFin = dateFin;
 	}
-
-
-
-
 	public String getEtatReservation() {
 		return etatReservation;
 	}
-
-
-
-
 	public void setEtatReservation(String etatReservation) {
 		this.etatReservation = etatReservation;
 	}
-
-
-
-
 	public List<Chambre> getListeChambre() {
 		return listeChambre;
 	}
-
-
-
-
 	public void setListeChambre(List<Chambre> listeChambre) {
 		this.listeChambre = listeChambre;
 	}
-
-
-
-
 	public Client getClient() {
 		return client;
 	}
-
-
-
-
 	public void setClient(Client client) {
 		this.client = client;
 	}
-
-
-
-
 	public Employe getEmploye() {
 		return employe;
 	}
-
-
-
-
 	public void setEmploye(Employe employe) {
 		this.employe = employe;
 	}
-	
-	
 }

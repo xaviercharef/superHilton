@@ -14,6 +14,9 @@ import javax.persistence.PersistenceContext;
 
 import javax.persistence.Query;
 
+import com.gestionHotel.hilton.entities.Chambre;
+import com.gestionHotel.hilton.entities.Client;
+import com.gestionHotel.hilton.entities.Employe;
 import com.gestionHotel.hilton.entities.Reservation;
 
 /**
@@ -37,26 +40,30 @@ public class ReservationImplDAO implements ReservationInterfDAO{
 	}
 	
 	@Override
-	public void addReservationParClientParEmploye(Long idClient, List<Long> listIdChambre,Date debut,Date fin,String etat,Long idEmploye){
+	public void addReservationParClientParEmploye(Long idClient,
+			List<Long> listIdChambre, Date debut, Date fin, String etat,
+			Long idEmploye) {
 		Reservation r= new Reservation();
 		Client c=em.find(Client.class, idClient);
 		Employe e=em.find(Employe.class, idEmploye);
 		List<Chambre> list= new ArrayList<Chambre>();
 		for(Long l:listIdChambre){
-			Chambre c=em.find(Chambre.class, l);
-			list.add(c);
+			Chambre ch=em.find(Chambre.class, l);
+			list.add(ch);
 		}
 		r.setClient(c);
-		//mettre le c.getListReservation().add(r);
+		c.getListResa().add(r);
 		r.setEmploye(e);
-		//mettre le e.getListReservation().add(r);
+		e.getListResa().add(r);
 		r.setListeChambre(list);
-		//mettre le for(Chambre ch :list){  ch.getListReservation().add(r);}
+		for(Chambre cha :list){  cha.getListReservation().add(r);}
 		r.setDateDebut(debut);
 		r.setDateFin(fin);
 		r.setEtatReservation(etat);
+		// TODO Auto-generated method stub
 		
 	}
+
 	
 
 	@Override
@@ -92,7 +99,7 @@ public class ReservationImplDAO implements ReservationInterfDAO{
 	@Override
 	public List<Reservation> getReservationParChambre(Long idChambre) {
 		Chambre ch= em.find(Chambre.class, idChambre);
-		List<Reservation> list= ch.getListeReservation();
+		List<Reservation> list= ch.getListReservation();
 		return list;
 	}
 
@@ -100,14 +107,14 @@ public class ReservationImplDAO implements ReservationInterfDAO{
 	public Employe getEmployeParReservation(Long idReservation) {
 		Reservation r= em.find(Reservation.class, idReservation);
 		Employe e=  r.getEmploye();
-		return r;
+		return e;
 	}
 
 	@Override
 	public Client getClientParReservation(Long idReservation) {
 		Reservation r= em.find(Reservation.class, idReservation);
-		Client e=  r.getClient();
-		return r;
+		Client c=  r.getClient();
+		return c;
 	}
 
 	@Override
@@ -118,27 +125,26 @@ public class ReservationImplDAO implements ReservationInterfDAO{
 	}
 
 	@Override
-	public Reservation setReservation(Long idReservation,Long idClient, List<Long> listIdChambre,Date debut,Date fin,String etat,Long idEmploye) {
+	public void setReservation(Long idReservation,Long idClient, List<Long> listIdChambre,Date debut,Date fin,String etat,Long idEmploye) {
 		Reservation r= em.find(Reservation.class, idReservation);
 		Client c=em.find(Client.class, idClient);
 		Employe e=em.find(Employe.class, idEmploye);
 		List<Chambre> list= new ArrayList<Chambre>();
 		for(Long l:listIdChambre){
-			Chambre c=em.find(Chambre.class, l);
-			list.add(c);
+			Chambre ch=em.find(Chambre.class, l);
+			list.add(ch);
 		}
 		r.setClient(c);
-		//mettre le c.getListReservation().add(r);
+		c.getListResa().add(r);
 		r.setEmploye(e);
-		//mettre le e.getListReservation().add(r);
+		e.getListResa().add(r);
 		r.setListeChambre(list);
-		//mettre le for(Chambre ch :list){  ch.getListReservation().add(r);}
+		for(Chambre cha :list){  cha.getListReservation().add(r);}
 		r.setDateDebut(debut);
 		r.setDateFin(fin);
-		r.setEtatReservation(etat);
-		
-		return null;
 	}
+
+	
 	
 
 }

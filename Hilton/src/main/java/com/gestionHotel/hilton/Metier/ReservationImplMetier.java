@@ -9,6 +9,9 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.gestionHotel.hilton.DAO.ReservationInterfDAO;
+import com.gestionHotel.hilton.entities.Chambre;
+import com.gestionHotel.hilton.entities.Client;
+import com.gestionHotel.hilton.entities.Employe;
 import com.gestionHotel.hilton.entities.Reservation;
 /**
 * @author Xavier Charef
@@ -93,10 +96,11 @@ public class ReservationImplMetier implements ReservationInterfMetier {
 	}
 
 	@Override
-	public Reservation setReservation(Long idReservation, Long idClient,
+	public void setReservation(Long idReservation, Long idClient,
 			List<Long> listIdChambre, Date debut, Date fin, String etat,
 			Long idEmploye) {
-		return daoReserv.setReservation(idReservation, idClient, listIdChambre, debut, fin, etat, idEmploye);
+		daoReserv.setReservation(idReservation, idClient, listIdChambre, debut, fin, etat, idEmploye);
 	}
 
+	
 }

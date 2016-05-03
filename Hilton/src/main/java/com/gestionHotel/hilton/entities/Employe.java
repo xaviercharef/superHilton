@@ -40,5 +40,14 @@ public class Employe extends Personne{
 		this.type = "Employe";
 	}
 
+	/**Getter et setter**/
+	public List<Reservation> getListResa() {
+		return listResa;
+	}
+
+	public void setListResa(List<Reservation> listResa) {
+		this.listResa = listResa;
+	}
+
 	
 }

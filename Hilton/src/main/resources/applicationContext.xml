@@ -7,13 +7,26 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
 		
-	<bean id="dao" class="com.gestionHotel.hilton.DAO.ReservationImplDAO"></bean>
-	<bean id="metier" class="com.gestionHotel.hilton.Metier.ReservationImplMetier">
-		<property name="daoReserv" ref="dao"></property>
+	<bean id="daoR" class="com.gestionHotel.hilton.DAO.ReservationImplDAO"></bean>
+	<bean id="metierR" class="com.gestionHotel.hilton.Metier.ReservationImplMetier">
+		<property name="daoReserv" ref="daoR"></property>
 	</bean>
+	<bean id="daoP" class="com.gestionHotel.hilton.DAO.IpmlDAOPersonne"></bean>
+	<bean id="metierP" class="com.gestionHotel.hilton.Metier.ImplMetierPersonne">
+		<property name="daoPers" ref="daoP"></property>
+	</bean>
+	<bean id="daoCh" class="com.gestionHotel.hilton.DAO.ImplDAOChambre"></bean>
+	<bean id="metierCh" class="com.gestionHotel.hilton.Metier.ImplMetierChambre">
+		<property name="daoChambre" ref="daoCh"></property>
+	</bean>
+	<bean id="daoF" class="com.gestionHotel.hilton.DAO.ImplDAOFacture"></bean>
+	<bean id="metierF" class="com.gestionHotel.hilton.Metier.ImplMetierFacture">
+		<property name="daoFac" ref="daoF"></property>
+	</bean>
+	
     <bean id="datasource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
     <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-    <property name="url" value="jdbc:mysql://localhost/test"></property>
+    <property name="url" value="jdbc:mysql://localhost/hilton"></property>
     <property name="username" value="root"></property>
     <property name="password" value=""></property>
     </bean>

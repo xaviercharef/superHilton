@@ -6,6 +6,9 @@ package com.gestionHotel.hilton.DAO;
 import java.util.Date;
 import java.util.List;
 
+import com.gestionHotel.hilton.entities.Chambre;
+import com.gestionHotel.hilton.entities.Client;
+import com.gestionHotel.hilton.entities.Employe;
 import com.gestionHotel.hilton.entities.Reservation;
 
 /**
@@ -29,6 +32,6 @@ public interface ReservationInterfDAO {
 	public Employe getEmployeParReservation(Long idReservation);
 	public Client getClientParReservation(Long idReservation);
 	public List<Chambre> getChambresParReservation(Long idReservation);
-	public Reservation setReservation(Long idReservation,Long idClient, List<Long> listIdChambre,Date debut,Date fin,String etat,Long idEmploye);
+	public void setReservation(Long idReservation,Long idClient, List<Long> listIdChambre,Date debut,Date fin,String etat,Long idEmploye);
 	
 }

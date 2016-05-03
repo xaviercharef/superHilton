@@ -40,8 +40,13 @@ public class Client extends Personne{
 		super(nom, prenom, sexe, dateDeNaissance, adresse);
 		this.type = "Client";
 	}
-	
-	
-	
 
+	
+	/**Getter et Setter**/
+	public List<Reservation> getListResa() {
+		return listResa;
+	}
+	public void setListResa(List<Reservation> listResa) {
+		this.listResa = listResa;
+	}
 }
