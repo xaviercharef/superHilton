@@ -1,0 +1,102 @@
+/**
+ * 
+ */
+package com.gestionHotel.hilton.Metier;
+import java.util.Date;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.gestionHotel.hilton.DAO.ReservationInterfDAO;
+import com.gestionHotel.hilton.entities.Reservation;
+/**
+* @author Xavier Charef
+* projet Hilton
+* version 1
+* package com.gestionHotel.hilton.Metier
+* classe: ReservationImplMetier
+* date: 02/05/2016
+ */
+
+@Transactional
+public class ReservationImplMetier implements ReservationInterfMetier {
+
+	private ReservationInterfDAO daoReserv;
+	private final Logger LOG= Logger.getLogger("ReservationImplMetier");
+	/** Setter **/
+
+	public void setDaoReserv(ReservationInterfDAO daoReserv) {
+		this.daoReserv = daoReserv;
+		LOG.info("bean realise");
+	}
+
+	
+	@Override
+	public void addReservation(Reservation r) {
+		daoReserv.addReservation(r);
+		
+	}
+
+	@Override
+	public void addReservationParClientParEmploye(Long idClient,
+			List<Long> listIdChambre, Date debut, Date fin, String etat,
+			Long idEmploye) {
+		daoReserv.addReservationParClientParEmploye(idClient, listIdChambre, debut, fin, etat, idEmploye);
+		
+	}
+
+	@Override
+	public List<Reservation> getListReservation() {
+		return daoReserv.getListReservation();
+	}
+
+	@Override
+	public Reservation getReservation(Long idReservation) {
+		return daoReserv.getReservation(idReservation);
+	}
+
+	@Override
+	public void suppReservation(Long idReservation) {
+		daoReserv.suppReservation(idReservation);
+		
+	}
+
+	@Override
+	public List<Reservation> getReservationParEmploye(Long idEmploye) {
+		return daoReserv.getReservationParEmploye(idEmploye);
+	}
+
+	@Override
+	public List<Reservation> getReservationParClient(Long idClient) {
+		return daoReserv.getReservationParClient(idClient);
+	}
+
+	@Override
+	public List<Reservation> getReservationParChambre(Long idChambre) {
+		return daoReserv.getReservationParChambre(idChambre);
+	}
+
+	@Override
+	public Employe getEmployeParReservation(Long idReservation) {
+		return daoReserv.getEmployeParReservation(idReservation);
+	}
+
+	@Override
+	public Client getClientParReservation(Long idReservation) {
+		return daoReserv.getClientParReservation(idReservation);
+	}
+
+	@Override
+	public List<Chambre> getChambresParReservation(Long idReservation) {
+		return daoReserv.getChambresParReservation(idReservation);
+	}
+
+	@Override
+	public Reservation setReservation(Long idReservation, Long idClient,
+			List<Long> listIdChambre, Date debut, Date fin, String etat,
+			Long idEmploye) {
+		return daoReserv.setReservation(idReservation, idClient, listIdChambre, debut, fin, etat, idEmploye);
+	}
+
+}
