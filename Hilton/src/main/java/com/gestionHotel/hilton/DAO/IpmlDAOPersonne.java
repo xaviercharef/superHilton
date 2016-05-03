@@ -1,0 +1,69 @@
+package com.gestionHotel.hilton.DAO;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
+import com.gestionHotel.hilton.entities.Personne;
+
+/**
+ *  @author Jean-Daniel
+ *  Nom projet : Hilton
+ *  Date : 02/05/2016
+ *  Package : com.gestionHotel.hilton.DAO
+ *  Class : IpmlDAOPersonne
+ *  Version : 1
+ *  Ref-UML : 1
+ *  Sprint : 1
+ *  ref-UserStory : 1
+ *  Association : InterfDAOPersonne
+ */
+
+public class IpmlDAOPersonne implements InterfDAOPersonne{
+
+	@PersistenceContext
+	EntityManager em;
+	
+	
+	/**Ajouter une personne a la base**/
+	@Override
+	public void addPersonne(Personne p) {
+		em.persist(p);
+		
+	}
+
+	/**Supprimer une personne de la base avec son Id**/
+	@Override
+	public void deletePersonne(Long idPersonne) {
+		Personne p = em.find(Personne.class, idPersonne);
+		em.remove(p);
+		
+	}
+
+	/**Mettre a jour une personne de la base avec son Id**/
+	@Override
+	public void updatePersonne(Long idPersonne) {
+		Personne p = em.find(Personne.class, idPersonne);
+		em.merge(p);
+		
+	}
+
+	/**Obtenir une personne de la base avec son Id**/
+	@Override
+	public Personne getPersonne(Long idPersonne) {
+		Personne p = em.find(Personne.class, idPersonne);
+		return p;
+	}
+
+	/**Obtenir toute les personnes possédant dans leur nom ou prenom le mot cle tapez**/
+	@Override
+	public List<Personne> searchPersonne(String mc) {
+		Query req = em.createQuery("FROM Personne p WHERE p.nom=:x OR p.prenom=:y");
+		req.setParameter("x", "%"+mc+"%");
+		req.setParameter("y", "%"+mc+"%");
+		return req.getResultList();
+	}
+
+}
