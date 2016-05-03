@@ -1,5 +1,6 @@
 package com.gestionHotel.hilton.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -22,7 +23,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 @DiscriminatorValue("Client")
-public class Client extends Personne{
+public class Client extends Personne implements Serializable {
 
 	
 	/**Association**/

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Query;
 
+import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.gestionHotel.hilton.DAO.InterfDAOPersonne;
@@ -24,14 +25,15 @@ import com.gestionHotel.hilton.entities.Personne;
 */
 
 @Transactional
-public class ImplMetierPersonne {
+public class ImplMetierPersonne implements InterfMetierPersonne{
 
 	/**Association**/
 	InterfDAOPersonne daoPers = new IpmlDAOPersonne();
-	
+	private final Logger LOG=Logger.getLogger("ImplMetierPersonne");
 	
 	public void setDaoPers(InterfDAOPersonne daoPers) {
 		this.daoPers = daoPers;
+		LOG.info("daoPers realise");
 	}
 
 	/**Ajouter une personne a la base**/

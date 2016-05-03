@@ -19,6 +19,7 @@ package com.gestionHotel.hilton.Metier;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.gestionHotel.hilton.DAO.InterfDAOChambre;
@@ -26,10 +27,14 @@ import com.gestionHotel.hilton.entities.Chambre;
 
 @Transactional
 public class ImplMetierChambre implements InterfMetierChambre  {
+	
 private InterfDAOChambre daoChambre ;
+private final Logger LOG=Logger.getLogger("ImplMetierChambre");
 
+/**Setter**/
  public void setDaoChambre(InterfDAOChambre daoChambre) {
  this.daoChambre = daoChambre;
+ LOG.info("bean daoChambre realise");
 }
 
 

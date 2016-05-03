@@ -31,7 +31,7 @@ public class ReservationImplMetier implements ReservationInterfMetier {
 
 	public void setDaoReserv(ReservationInterfDAO daoReserv) {
 		this.daoReserv = daoReserv;
-		LOG.info("bean realise");
+		LOG.info("bean daoReserv realise");
 	}
 
 	

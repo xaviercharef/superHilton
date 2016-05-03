@@ -1,5 +1,6 @@
 package com.gestionHotel.hilton.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.DiscriminatorColumn;
@@ -29,7 +30,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="Role", discriminatorType=DiscriminatorType.STRING)
-public abstract class Personne {
+public abstract class Personne implements Serializable {
 	
 	/**Attribut**/
 	@Id

@@ -2,14 +2,18 @@ package com.gestionHotel.hilton.Metier;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.gestionHotel.hilton.DAO.InterfDAOFacture;
 import com.gestionHotel.hilton.entities.Facture;
 
 public class ImplMetierFacture implements InterfMetierFacture{
 
 	private InterfDAOFacture daoFac ;
+	private final Logger LOG=Logger.getLogger("ImplMetierFacture");
 	 public void setDaoFac(InterfDAOFacture daoFac) {
 	 this.daoFac = daoFac;
+	 LOG.info("beanFacture realise");
 	}
 
 	 @Override

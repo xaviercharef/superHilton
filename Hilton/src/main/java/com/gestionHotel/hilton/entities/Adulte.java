@@ -1,5 +1,6 @@
 package com.gestionHotel.hilton.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.DiscriminatorValue;
@@ -20,7 +21,7 @@ import javax.persistence.Entity;
 
 @Entity
 @DiscriminatorValue("Client Adulte")
-public class Adulte extends Client{
+public class Adulte extends Client implements Serializable {
 
 	public Adulte() {
 		super();
