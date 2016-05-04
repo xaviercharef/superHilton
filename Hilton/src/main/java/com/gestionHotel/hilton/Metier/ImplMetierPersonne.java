@@ -31,34 +31,52 @@ public class ImplMetierPersonne implements InterfMetierPersonne{
 	InterfDAOPersonne daoPers = new IpmlDAOPersonne();
 	private final Logger LOG=Logger.getLogger("ImplMetierPersonne");
 	
-	public void setDaoPers(InterfDAOPersonne daoPers) {
-		this.daoPers = daoPers;
-		LOG.info("daoPers realise");
-	}
-
 	/**Ajouter une personne a la base**/
+	@Override
 	public void addPersonne(Personne p) {
 		daoPers.addPersonne(p);;
 	}
 
 	/**Supprimer une personne de la base avec son Id**/
+	@Override
 	public void deletePersonne(Long idPersonne) {
 		daoPers.deletePersonne(idPersonne);
 	}
 
 	/**Mettre a jour une personne de la base avec son Id**/
-	public void updatePersonne(Long idPersonne) {
-		daoPers.updatePersonne(idPersonne);
+	@Override
+	public void updatePersonne(Personne p) {
+		daoPers.updatePersonne(p);
 	}
 
 	/**Obtenir une personne de la base avec son Id**/
+	@Override
 	public Personne getPersonne(Long idPersonne) {
 		return daoPers.getPersonne(idPersonne);
 	}
 
+	/**Obtenir toute les persone entre dans la bases**/
+	@Override
+	public List<Personne> getAllPersonne (){
+		return daoPers.getAllPersonne();
+		
+	}
+	
 	/**Obtenir toute les personnes possédant dans leur nom ou prenom le mot cle tapez**/
+	@Override
 	public List<Personne> searchPersonne(String mc) {
 		return daoPers.searchPersonne(mc);
+	}
+
+	
+	
+	/**Getter et Setter**/
+	public InterfDAOPersonne getDaoPers() {
+		return daoPers;
+	}
+	public void setDaoPers(InterfDAOPersonne daoPers) {
+		this.daoPers = daoPers;
+		LOG.info("daoPers realise");
 	}
 
 }

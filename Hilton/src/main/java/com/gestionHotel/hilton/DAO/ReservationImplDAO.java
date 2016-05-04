@@ -47,21 +47,25 @@ public class ReservationImplDAO implements ReservationInterfDAO{
 		Client c=em.find(Client.class, idClient);
 		Employe e=em.find(Employe.class, idEmploye);
 		List<Chambre> list= new ArrayList<Chambre>();
+		
 		for(Long l:listIdChambre){
 			Chambre ch=em.find(Chambre.class, l);
 			list.add(ch);
 		}
+		
 		r.setClient(c);
 		c.getListResa().add(r);
+		
 		r.setEmploye(e);
 		e.getListResa().add(r);
+		
 		r.setListeChambre(list);
 		for(Chambre cha :list){  cha.getListReservation().add(r);}
+		
 		r.setDateDebut(debut);
 		r.setDateFin(fin);
 		r.setEtatReservation(etat);
-		// TODO Auto-generated method stub
-		
+		em.persist(r);
 	}
 
 	

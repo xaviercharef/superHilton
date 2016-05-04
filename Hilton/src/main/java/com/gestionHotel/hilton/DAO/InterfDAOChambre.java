@@ -13,6 +13,7 @@
 
 package com.gestionHotel.hilton.DAO;
 
+import java.util.Date;
 import java.util.List;
 
 import com.gestionHotel.hilton.entities.Chambre;
@@ -23,8 +24,9 @@ public interface InterfDAOChambre {
     public void deleteChambre(Long idChambre);
     public void updateChambre(Chambre c);
     public Chambre getChambre(Long idChambre);
-    public List<Chambre> ListChambre();
-    
+    public List<Chambre> getListChambre();
+    public Date getDatedebut(Long idReservation);
+    public Date getDateFin(Long idReservation);
     
     
 }

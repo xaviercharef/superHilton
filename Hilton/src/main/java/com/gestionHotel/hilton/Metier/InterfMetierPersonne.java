@@ -26,10 +26,13 @@ public interface InterfMetierPersonne {
 	public void deletePersonne (Long idPersonne);
 	
 	/**Mettre a jour une personne de la base avec son Id**/
-	public void updatePersonne (Long idPersonne);
+	public void updatePersonne (Personne p);
 	
 	/**Obtenir une personne de la base avec son Id**/
 	public Personne getPersonne (Long idPersonne);
+	
+	/**Obtenir toute les persone entre dans la bases**/
+	public List<Personne> getAllPersonne ();
 	
 	/**Obtenir toute les personnes possédant dans leur nom ou prenom le mot cle tapez**/
 	public List<Personne> searchPersonne (String mc);

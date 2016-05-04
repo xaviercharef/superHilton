@@ -17,7 +17,6 @@ import com.gestionHotel.hilton.entities.Reservation;
 * date: 02/05/2016
  */
 public interface ReservationInterfMetier {
-	
 	public void addReservation(Reservation r);
 	public void addReservationParClientParEmploye(Long idClient, List<Long> listIdChambre,Date debut,Date fin,String etat,Long idEmploye);
 	public List<Reservation> getListReservation();
@@ -30,4 +29,5 @@ public interface ReservationInterfMetier {
 	public Client getClientParReservation(Long idReservation);
 	public List<Chambre> getChambresParReservation(Long idReservation);
 	public void setReservation(Long idReservation,Long idClient, List<Long> listIdChambre,Date debut,Date fin,String etat,Long idEmploye);
+	
 }

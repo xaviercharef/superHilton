@@ -17,6 +17,8 @@ package com.gestionHotel.hilton.Metier;
 
 
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -24,6 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.gestionHotel.hilton.DAO.InterfDAOChambre;
 import com.gestionHotel.hilton.entities.Chambre;
+import com.gestionHotel.hilton.entities.Reservation;
 
 @Transactional
 public class ImplMetierChambre implements InterfMetierChambre  {
@@ -63,9 +66,49 @@ private final Logger LOG=Logger.getLogger("ImplMetierChambre");
  }
 
  @Override
- public List<Chambre> ListChambre() {
+ public List<Chambre> getListChambre() {
   // TODO Auto-generated method stub
-  return daoChambre.ListChambre();
+  return daoChambre.getListChambre();
  }
+
+
+
+@Override
+public Date getDatedebut(Long idReservation) {
+	// TODO Auto-generated method stub
+	return daoChambre.getDatedebut(idReservation);
+}
+
+
+@Override
+public Date getDateFin(Long idReservation) {
+	// TODO Auto-generated method stub
+	return daoChambre.getDateFin(idReservation);
+}
+
+
+@Override
+public List<Chambre> getListChambreLibre(Date debut, Date fin) {
+	List<Chambre> chamli=new ArrayList<Chambre>();
+	for(Chambre c:daoChambre.getListChambre()){
+		if(c.getListReservation().size()==0){
+			chamli.add(c);
+		}
+		else{int i=0;
+			for(Reservation r:c.getListReservation()){
+			if(debut.getTime()>daoChambre.getDatedebut(r.getIdReservation()).getTime() & debut.getTime()<daoChambre.getDateFin(r.getIdReservation()).getTime()
+					|| fin.getTime()>daoChambre.getDatedebut(r.getIdReservation()).getTime() & fin.getTime()<daoChambre.getDateFin(r.getIdReservation()).getTime()){
+				i=1;
+			}
+			if(i==1) break;
+			}
+			if(i==0){
+				chamli.add(c);
+			}
+		}
+	}
+	return chamli; 
+}
+ 
 
 }

@@ -44,8 +44,7 @@ public class IpmlDAOPersonne implements InterfDAOPersonne{
 
 	/**Mettre a jour une personne de la base avec son Id**/
 	@Override
-	public void updatePersonne(Long idPersonne) {
-		Personne p = em.find(Personne.class, idPersonne);
+	public void updatePersonne(Personne p) {
 		em.merge(p);
 		
 	}
@@ -57,6 +56,13 @@ public class IpmlDAOPersonne implements InterfDAOPersonne{
 		return p;
 	}
 
+	/**Obtenir toute les persone entre dans la bases**/
+	@Override
+	public List<Personne> getAllPersonne() {
+		Query req = em.createQuery("SELECT p FROM Personne p");
+		return req.getResultList();
+	}
+	
 	/**Obtenir toute les personnes possédant dans leur nom ou prenom le mot cle tapez**/
 	@Override
 	public List<Personne> searchPersonne(String mc) {
@@ -65,5 +71,7 @@ public class IpmlDAOPersonne implements InterfDAOPersonne{
 		req.setParameter("y", "%"+mc+"%");
 		return req.getResultList();
 	}
+
+	
 
 }

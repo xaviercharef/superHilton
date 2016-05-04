@@ -12,6 +12,7 @@
  * */
 package com.gestionHotel.hilton.Metier;
 
+import java.util.Date;
 import java.util.List;
 
 import com.gestionHotel.hilton.entities.Chambre;
@@ -25,5 +26,8 @@ public interface InterfMetierChambre {
      public void deleteChambre(Long idChambre);
      public void updateChambre(Chambre c);
      public Chambre getChambre(Long idChambre);
-     public List<Chambre> ListChambre();
+     public List<Chambre> getListChambre();
+     public Date getDatedebut(Long idReservation);
+     public Date getDateFin(Long idReservation);
+     public List<Chambre> getListChambreLibre(Date début, Date Fin);
 }

@@ -9,10 +9,10 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.gestionHotel.hilton.DAO.ReservationInterfDAO;
-import com.gestionHotel.hilton.entities.Chambre;
 import com.gestionHotel.hilton.entities.Client;
 import com.gestionHotel.hilton.entities.Employe;
 import com.gestionHotel.hilton.entities.Reservation;
+import com.gestionHotel.hilton.entities.Chambre;
 /**
 * @author Xavier Charef
 * projet Hilton
@@ -31,7 +31,7 @@ public class ReservationImplMetier implements ReservationInterfMetier {
 
 	public void setDaoReserv(ReservationInterfDAO daoReserv) {
 		this.daoReserv = daoReserv;
-		LOG.info("bean daoReserv realise");
+		LOG.info("bean realise");
 	}
 
 	
@@ -102,5 +102,4 @@ public class ReservationImplMetier implements ReservationInterfMetier {
 		daoReserv.setReservation(idReservation, idClient, listIdChambre, debut, fin, etat, idEmploye);
 	}
 
-	
 }

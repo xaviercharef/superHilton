@@ -13,6 +13,7 @@
 
 package com.gestionHotel.hilton.DAO;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -21,6 +22,7 @@ import javax.persistence.Query;
 
 import com.gestionHotel.hilton.entities.Chambre;
 import com.gestionHotel.hilton.entities.Facture;
+import com.gestionHotel.hilton.entities.Reservation;
 
 
 public class ImplDAOChambre implements InterfDAOChambre{
@@ -53,9 +55,21 @@ private EntityManager em ;
  }
 
  @Override
- public List<Chambre> ListChambre() {
+ public List<Chambre> getListChambre() {
   Query req =em.createQuery("Select c from Chambre c ");
   return req.getResultList();
  }
+
+@Override
+public Date getDatedebut(Long idReservation) {
+	Reservation r=em.find(Reservation.class, idReservation);
+	return r.getDateDebut();
+}
+
+@Override
+public Date getDateFin(Long idReservation) {
+	Reservation r=em.find(Reservation.class, idReservation);
+	return r.getDateFin();
+}
 
 }
