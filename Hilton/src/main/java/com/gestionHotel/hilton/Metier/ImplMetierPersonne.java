@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.gestionHotel.hilton.DAO.InterfDAOPersonne;
 import com.gestionHotel.hilton.DAO.IpmlDAOPersonne;
+import com.gestionHotel.hilton.entities.Client;
+import com.gestionHotel.hilton.entities.Employe;
 import com.gestionHotel.hilton.entities.Personne;
 
 /**
@@ -62,6 +64,18 @@ public class ImplMetierPersonne implements InterfMetierPersonne{
 		
 	}
 	
+	/**Obtenir toute les clients entre dans la bases**/
+	@Override
+	public List<Client> getAllClient() {
+		return daoPers.getAllClient();
+	}
+
+	/**Obtenir toute les employes entre dans la bases**/
+	@Override
+	public List<Employe> getAllEmploye() {
+		return daoPers.getAllEmploye();
+	}
+	
 	/**Obtenir toute les personnes possédant dans leur nom ou prenom le mot cle tapez**/
 	@Override
 	public List<Personne> searchPersonne(String mc) {
@@ -78,5 +92,13 @@ public class ImplMetierPersonne implements InterfMetierPersonne{
 		this.daoPers = daoPers;
 		LOG.info("daoPers realise");
 	}
+
+	@Override
+	public Long getIdPersonne(String nomPersonne) {
+		// TODO Auto-generated method stub
+		return daoPers.getIdPersonne(nomPersonne);
+	}
+
+	
 
 }

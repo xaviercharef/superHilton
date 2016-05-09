@@ -70,10 +70,9 @@ public void setDevis(Devis devis) {
 public Facture() {
  super();
 }
-public Facture(Date datePaiement, String typePaiment, Devis devis) {
+public Facture(Date datePaiement, String typePaiment) {
  super();
  this.datePaiement = datePaiement;
  this.typePaiment = typePaiment;
- this.devis = devis;
 }
 }

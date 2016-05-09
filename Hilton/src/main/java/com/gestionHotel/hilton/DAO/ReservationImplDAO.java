@@ -17,6 +17,7 @@ import javax.persistence.Query;
 import com.gestionHotel.hilton.entities.Chambre;
 import com.gestionHotel.hilton.entities.Client;
 import com.gestionHotel.hilton.entities.Employe;
+import com.gestionHotel.hilton.entities.Personne;
 import com.gestionHotel.hilton.entities.Reservation;
 
 /**
@@ -39,36 +40,6 @@ public class ReservationImplDAO implements ReservationInterfDAO{
 		em.persist(r);
 	}
 	
-	@Override
-	public void addReservationParClientParEmploye(Long idClient,
-			List<Long> listIdChambre, Date debut, Date fin, String etat,
-			Long idEmploye) {
-		Reservation r= new Reservation();
-		Client c=em.find(Client.class, idClient);
-		Employe e=em.find(Employe.class, idEmploye);
-		List<Chambre> list= new ArrayList<Chambre>();
-		
-		for(Long l:listIdChambre){
-			Chambre ch=em.find(Chambre.class, l);
-			list.add(ch);
-		}
-		
-		r.setClient(c);
-		c.getListResa().add(r);
-		
-		r.setEmploye(e);
-		e.getListResa().add(r);
-		
-		r.setListeChambre(list);
-		for(Chambre cha :list){  cha.getListReservation().add(r);}
-		
-		r.setDateDebut(debut);
-		r.setDateFin(fin);
-		r.setEtatReservation(etat);
-		em.persist(r);
-	}
-
-	
 
 	@Override
 	public List<Reservation> getListReservation() {
@@ -90,13 +61,15 @@ public class ReservationImplDAO implements ReservationInterfDAO{
 
 	@Override
 	public List<Reservation> getReservationParEmploye(Long idEmploye) {
-		Query query= em.createQuery("select r from Reservation r where r.employe.idEmploye=idEmploye");
+		Query query= em.createQuery("select r from Reservation r where r.employe.idPersonne= :x");
+		query.setParameter("x", idEmploye);
 		return query.getResultList();
 	}
 
 	@Override
 	public List<Reservation> getReservationParClient(Long idClient) {
-		Query query= em.createQuery("select r from Reservation r where r.client.idClient=idClient");
+		Query query= em.createQuery("select r from Reservation r where r.client.idPersonne=:x");
+		query.setParameter("x", idClient);
 		return query.getResultList();
 	}
 
@@ -140,12 +113,39 @@ public class ReservationImplDAO implements ReservationInterfDAO{
 		}
 		r.setClient(c);
 		c.getListResa().add(r);
+		
 		r.setEmploye(e);
 		e.getListResa().add(r);
+		
 		r.setListeChambre(list);
-		for(Chambre cha :list){  cha.getListReservation().add(r);}
+		for(Chambre cha :list){
+			cha.getListReservation().add(r);
+		}
+		
 		r.setDateDebut(debut);
 		r.setDateFin(fin);
+		
+		r.setEtatReservation(etat);
+		
+		em.merge(r);
+	}
+
+	@Override
+	public void addReservationParClientParEmploye(Long idClient,Long idChambre,Reservation r, Long idEmploye) {
+	
+		Chambre ch=em.find(Chambre.class, idChambre);
+		Client c=em.find(Client.class, idClient);
+		Employe e=em.find(Employe.class, idEmploye);
+		r.setClient(c);
+		c.getListResa().add(r);
+		
+		r.setEmploye(e);
+		e.getListResa().add(r);
+
+		r.getListeChambre().add(ch);
+		ch.getListReservation().add(r);
+		em.persist(r);
+		
 	}
 
 	

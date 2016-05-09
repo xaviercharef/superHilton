@@ -6,6 +6,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import com.gestionHotel.hilton.entities.Client;
+import com.gestionHotel.hilton.entities.Employe;
 import com.gestionHotel.hilton.entities.Personne;
 
 /**
@@ -63,6 +65,21 @@ public class IpmlDAOPersonne implements InterfDAOPersonne{
 		return req.getResultList();
 	}
 	
+	/**Obtenir toute les clients entre dans la bases**/
+	@Override
+	public List<Client> getAllClient() {
+		Query req = em.createQuery("SELECT p FROM Personne p WHERE p.type=Client OR p.type=Adulte OR p.type=Enfant OR p.type=Bebe");
+		return req.getResultList();
+	}
+
+	/**Obtenir toute les employes entre dans la bases**/
+	@Override
+	public List<Employe> getAllEmploye() {
+		Query req=em.createQuery("SELECT p FROM Personne p WHERE p.type=Employe");
+		return req.getResultList();
+	}
+	
+	
 	/**Obtenir toute les personnes possédant dans leur nom ou prenom le mot cle tapez**/
 	@Override
 	public List<Personne> searchPersonne(String mc) {
@@ -70,6 +87,14 @@ public class IpmlDAOPersonne implements InterfDAOPersonne{
 		req.setParameter("x", "%"+mc+"%");
 		req.setParameter("y", "%"+mc+"%");
 		return req.getResultList();
+	}
+
+	@Override
+	public Long getIdPersonne(String nomPersonne) {
+		Query req= em.createQuery("From Personne p where p.nom=:x");
+		req.setParameter(1, nomPersonne);
+		Personne p=(Personne) req.getResultList().get(0);
+		return p.getIdPersonne();
 	}
 
 	

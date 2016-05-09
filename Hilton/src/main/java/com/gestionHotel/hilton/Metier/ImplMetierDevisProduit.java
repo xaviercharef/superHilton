@@ -15,69 +15,69 @@ import com.gestionHotel.hilton.entities.Reservation;
 @Transactional
 public class ImplMetierDevisProduit implements InterfMetierDevisProduit {
 	private final Logger LOG=Logger.getLogger("ImplMetierDevisProduit");
-	private InterfDAODevisProduit dao;
+	private InterfDAODevisProduit daoDev;
 	
-	public void setDao(InterfDAODevisProduit dao) {
-		this.dao = dao;
-		LOG.info("dao MetierDevisProduit injected");
+	public void setDaoDev(InterfDAODevisProduit daoDev) {
+		this.daoDev = daoDev;
+		LOG.info("daoDev MetierDevisProduit injected");
 	}
 
 	@Override
 	public List<Produit> getListProduit() {
 		// TODO Auto-generated method stub
-		return dao.getListProduit();
+		return daoDev.getListProduit();
 	}
 
 	@Override
 	public Produit getProduit(Long idProduit) {
 		// TODO Auto-generated method stub
-		return dao.getProduit(idProduit);
+		return daoDev.getProduit(idProduit);
 	}
 
 	@Override
 	public void addProduit(Produit p) {
-		dao.addProduit(p);
+		daoDev.addProduit(p);
 
 	}
 
 	@Override
 	public void deleteProduit(Long idProduit) {
-		dao.deleteProduit(idProduit);
+		daoDev.deleteProduit(idProduit);
 
 	}
 
 	@Override
 	public List<Devis> getListDevis() {
 		
-		return dao.getListDevis();
+		return daoDev.getListDevis();
 	}
 
 	@Override
 	public Devis getDevis(Long idDevis) {
 		
-		return dao.getDevis(idDevis);
+		return daoDev.getDevis(idDevis);
 	}
 
 	@Override
 	public void addDevisReservationProduit(Devis d, Long idReservation, List<Long> listidProduit) {
-		dao.addDevisReservationProduit(d, idReservation, listidProduit);
+		daoDev.addDevisReservationProduit(d, idReservation, listidProduit);
 
 	}
 
 	@Override
 	public void deleteDevis(Long idDevis) {
-		dao.deleteDevis(idDevis);
+		daoDev.deleteDevis(idDevis);
 	}
 
 	@Override
 	public List<Produit> getListProduitParDevis(Long idDevis) {
 		
-		return dao.getListProduitParDevis(idDevis);
+		return daoDev.getListProduitParDevis(idDevis);
 	}
 
 	@Override
 	public Double coutReservationParDevis(Long idDevis) {
-		Reservation r=dao.getReservationParDevis(idDevis);
+		Reservation r=daoDev.getReservationParDevis(idDevis);
 		Double cout=0.d;   /* ************************************* */
 		for(Chambre c: r.getListeChambre()){
 			cout=cout+c.getPrix()*(r.getDateFin().getTime()-r.getDateDebut().getTime())/(24*3600*1000);
@@ -90,7 +90,7 @@ public class ImplMetierDevisProduit implements InterfMetierDevisProduit {
 
 	@Override
 	public Double coutProduitParDevis(Long idDevis) {
-		List<Produit> tabp=dao.getListProduitParDevis(idDevis);
+		List<Produit> tabp=daoDev.getListProduitParDevis(idDevis);
 		Double cout=0.d;
 		for(Produit p:tabp){
 			cout=cout+p.getPrix();
@@ -100,7 +100,7 @@ public class ImplMetierDevisProduit implements InterfMetierDevisProduit {
 
 	@Override
 	public Double coutProduittotal() {
-		List<Produit> tabp=dao.getListProduit();
+		List<Produit> tabp=daoDev.getListProduit();
 		Double cout=0.d;
 		for(Produit p:tabp){
 			cout=cout+p.getPrix();
@@ -111,7 +111,7 @@ public class ImplMetierDevisProduit implements InterfMetierDevisProduit {
 	@Override
 	public Reservation getReservationParDevis(Long idDevis) {
 		// TODO Auto-generated method stub
-		return dao.getReservationParDevis(idDevis);
+		return daoDev.getReservationParDevis(idDevis);
 	}
 
 }

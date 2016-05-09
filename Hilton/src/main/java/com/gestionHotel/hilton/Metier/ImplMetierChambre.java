@@ -66,49 +66,44 @@ private final Logger LOG=Logger.getLogger("ImplMetierChambre");
  }
 
  @Override
- public List<Chambre> getListChambre() {
+ public List<Chambre> ListChambre() {
   // TODO Auto-generated method stub
-  return daoChambre.getListChambre();
+  return daoChambre.ListChambre();
+ }
+ 
+ @Override
+ public Date getDatedebut(Long idReservation) {
+ 	// TODO Auto-generated method stub
+ 	return daoChambre.getDatedebut(idReservation);
  }
 
+ @Override
+ public Date getDateFin(Long idReservation) {
+ 	// TODO Auto-generated method stub
+ 	return daoChambre.getDateFin(idReservation);
+ }
 
-
-@Override
-public Date getDatedebut(Long idReservation) {
-	// TODO Auto-generated method stub
-	return daoChambre.getDatedebut(idReservation);
-}
-
-
-@Override
-public Date getDateFin(Long idReservation) {
-	// TODO Auto-generated method stub
-	return daoChambre.getDateFin(idReservation);
-}
-
-
-@Override
-public List<Chambre> getListChambreLibre(Date debut, Date fin) {
-	List<Chambre> chamli=new ArrayList<Chambre>();
-	for(Chambre c:daoChambre.getListChambre()){
-		if(c.getListReservation().size()==0){
-			chamli.add(c);
-		}
-		else{int i=0;
-			for(Reservation r:c.getListReservation()){
-			if(debut.getTime()>daoChambre.getDatedebut(r.getIdReservation()).getTime() & debut.getTime()<daoChambre.getDateFin(r.getIdReservation()).getTime()
-					|| fin.getTime()>daoChambre.getDatedebut(r.getIdReservation()).getTime() & fin.getTime()<daoChambre.getDateFin(r.getIdReservation()).getTime()){
-				i=1;
-			}
-			if(i==1) break;
-			}
-			if(i==0){
-				chamli.add(c);
-			}
-		}
-	}
-	return chamli; 
-}
- 
+ @Override
+ public List<Chambre> getListChambreLibre(Date debut, Date fin) {
+ 	List<Chambre> chamli=new ArrayList<Chambre>();
+ 	for(Chambre c:daoChambre.ListChambre()){
+ 		if(c.getListReservation().size()==0){
+ 			chamli.add(c);
+ 		}
+ 		else{int i=0;
+ 			for(Reservation r:c.getListReservation()){
+ 			if(debut.getTime()>daoChambre.getDatedebut(r.getIdReservation()).getTime() & debut.getTime()<daoChambre.getDateFin(r.getIdReservation()).getTime()
+ 					|| fin.getTime()>daoChambre.getDatedebut(r.getIdReservation()).getTime() & fin.getTime()<daoChambre.getDateFin(r.getIdReservation()).getTime()){
+ 				i=1;
+ 			}
+ 			if(i==1) break;
+ 			}
+ 			if(i==0){
+ 				chamli.add(c);
+ 			}
+ 		}
+ 	}
+ 	return chamli; 
+ }
 
 }

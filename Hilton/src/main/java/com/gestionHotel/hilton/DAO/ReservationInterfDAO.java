@@ -22,7 +22,7 @@ import com.gestionHotel.hilton.entities.Reservation;
 public interface ReservationInterfDAO {
 
 	public void addReservation(Reservation r);
-	public void addReservationParClientParEmploye(Long idClient, List<Long> listIdChambre,Date debut,Date fin,String etat,Long idEmploye);
+	public void addReservationParClientParEmploye(Long idClient, Long idChambre,Reservation r,Long idEmploye);
 	public List<Reservation> getListReservation();
 	public Reservation getReservation(Long idReservation);
 	public void suppReservation(Long idReservation);

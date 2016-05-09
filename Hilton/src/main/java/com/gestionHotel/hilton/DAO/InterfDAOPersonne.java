@@ -2,6 +2,8 @@ package com.gestionHotel.hilton.DAO;
 
 import java.util.List;
 
+import com.gestionHotel.hilton.entities.Client;
+import com.gestionHotel.hilton.entities.Employe;
 import com.gestionHotel.hilton.entities.Personne;
 
 /**
@@ -33,6 +35,15 @@ public interface InterfDAOPersonne {
 	/**Obtenir toute les persone entre dans la bases**/
 	public List<Personne> getAllPersonne ();
 	
+	/**Obtenir toute les clients entre dans la bases**/
+	public List<Client> getAllClient();
+	
+	/**Obtenir toute les employes entre dans la bases**/
+	public List<Employe> getAllEmploye();
+	
 	/**Obtenir toute les personnes possédant dans leur nom ou prenom le mot cle tapez**/
 	public List<Personne> searchPersonne (String mc);
+	
+	/**Obtenir l'id d'une personne a partir du nom**/
+	public Long getIdPersonne(String nomPersonne);
 }

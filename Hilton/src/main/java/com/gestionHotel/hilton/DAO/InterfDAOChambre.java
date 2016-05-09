@@ -24,9 +24,9 @@ public interface InterfDAOChambre {
     public void deleteChambre(Long idChambre);
     public void updateChambre(Chambre c);
     public Chambre getChambre(Long idChambre);
-    public List<Chambre> getListChambre();
+    public List<Chambre> ListChambre();
     public Date getDatedebut(Long idReservation);
     public Date getDateFin(Long idReservation);
-    
+        
     
 }

@@ -55,21 +55,21 @@ private EntityManager em ;
  }
 
  @Override
- public List<Chambre> getListChambre() {
+ public List<Chambre> ListChambre() {
   Query req =em.createQuery("Select c from Chambre c ");
   return req.getResultList();
  }
+ 
+ @Override
+ public Date getDatedebut(Long idReservation) {
+ 	Reservation r=em.find(Reservation.class, idReservation);
+ 	return r.getDateDebut();
+ }
 
-@Override
-public Date getDatedebut(Long idReservation) {
-	Reservation r=em.find(Reservation.class, idReservation);
-	return r.getDateDebut();
-}
-
-@Override
-public Date getDateFin(Long idReservation) {
-	Reservation r=em.find(Reservation.class, idReservation);
-	return r.getDateFin();
-}
+ @Override
+ public Date getDateFin(Long idReservation) {
+ 	Reservation r=em.find(Reservation.class, idReservation);
+ 	return r.getDateFin();
+ }
 
 }

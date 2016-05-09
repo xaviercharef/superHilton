@@ -42,10 +42,8 @@ public class ReservationImplMetier implements ReservationInterfMetier {
 	}
 
 	@Override
-	public void addReservationParClientParEmploye(Long idClient,
-			List<Long> listIdChambre, Date debut, Date fin, String etat,
-			Long idEmploye) {
-		daoReserv.addReservationParClientParEmploye(idClient, listIdChambre, debut, fin, etat, idEmploye);
+	public void addReservationParClientParEmploye(Long idClient,Long idChambre,Reservation r, Long idEmploye){
+		daoReserv.addReservationParClientParEmploye(idClient, idChambre, r, idEmploye);
 		
 	}
 

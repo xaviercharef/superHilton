@@ -40,22 +40,23 @@ public class Reservation implements Serializable{
 	private Long idReservation;
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date dateDebut;
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date dateFin;
 	private String etatReservation;
 	
 	
 	/** Associations **/
 	
-	@ManyToMany
+	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name="Reservation_Chambre",joinColumns=@JoinColumn(name="id_Reservation"), inverseJoinColumns=@JoinColumn(name="id_Chambre"))
 	private List<Chambre> listeChambre= new ArrayList<Chambre>();
 	
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="ID_Resevation")
+	@JoinColumn(name="ID_Client")
 	private Client client;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="ID_Reservation")
+	@JoinColumn(name="ID_Employe")
 	private Employe employe;
 	
 	

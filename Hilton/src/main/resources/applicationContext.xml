@@ -23,8 +23,17 @@
 	<bean id="metierF" class="com.gestionHotel.hilton.Metier.ImplMetierFacture">
 		<property name="daoFac" ref="daoF"></property>
 	</bean>
+	<bean id="daoD" class="com.gestionHotel.hilton.DAO.ImplDAODevisProduit"></bean>
+	<bean id="metierD" class="com.gestionHotel.hilton.Metier.ImplMetierDevisProduit">
+		<property name="daoDev" ref="daoD"></property>
+	</bean>
+	<bean id="daoRev" class="com.gestionHotel.hilton.DAO.ImplDAODevisProduit"></bean>
+	<bean id="metierRev" class="com.gestionHotel.hilton.Metier.ImplMetierRevenu">
+		<property name="daoRev" ref="daoRev"></property>
+	</bean>
 	
-    <bean id="datasource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	
+   	<bean id="datasource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
     <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
     <property name="url" value="jdbc:mysql://localhost/hilton"></property>
     <property name="username" value="root"></property>
