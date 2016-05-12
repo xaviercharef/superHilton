@@ -27,6 +27,6 @@ public interface InterfDAOChambre {
     public List<Chambre> ListChambre();
     public Date getDatedebut(Long idReservation);
     public Date getDateFin(Long idReservation);
-        
+    public List<Chambre> getAllChambre();
     
 }

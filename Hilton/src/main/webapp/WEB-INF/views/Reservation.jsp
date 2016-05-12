@@ -1,23 +1,49 @@
 <%@  taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css"	href="<%=request.getContextPath()%>/resources/bootstrap.css">
 <title>Booking Hotel</title>
 </head>
-<body>
+<body class="container">
+ <br/><br/><br/><br/>
+	<form action="enregistrerReservation" method="post">
+		<label>nomClient :</label>
+        <select name="idClient">
+			<c:forEach items="${allClient}" var="cl">
+				<option value="${cl.idPersonne}">${cl.nom}</option>
+			</c:forEach>
+		</select>
+		<label>numeroChambre</label> 
+		<select name="idChambre">
+			<c:forEach items="${allCh}" var="ch">
+				<option value="${ch.idChambre}">${ch.idChambre}</option>
+			</c:forEach>
+		</select>
+		<label>nomEmploye</label>
+		<select name="idEmploye">
+			<c:forEach items="${allEmploye}" var="em">
+				<option value="${em.idPersonne}">${em.nom}</option>
+			</c:forEach>
+		</select>
+		<label>Etat de Reservation :</label> 
+			
+		<select name="etatReservation">
+			<option>-----Choisir-------</option>
+			<option>en Cours</option>
+			<option>Reservée</option>
+			<option>Confirmée</option>
+		</select>
 
-	<form action="enregisterReservation" method="post">
-		<input type="number" name="idClient" placeholder="idClient">
-		<input type="number" name="numeroChambre" placeholder="numeroChambre">
-		<input type="number" name="idEmploye" placeholder="idEmploye">
-		<input type="submit" class="btn btn-primary" name="enregistrer">
+		<button class="btn btn-info">Enregistrer </button>
+			
+		
 	</form>
-	
-	<form action="modifierReservation" method="post">
+
+	<%-- <form action="modifierReservation" method="post">
 		<input type="number" name="idReservation" placeholder="idReservation">
 		<input type="number" name="idClient" placeholder="idClient">
 		<input type="number" name="numeroChambre" placeholder="numeroChambre">
@@ -62,7 +88,7 @@
 			</form>
 		</c:if>
 			
-	</div>
+	</div>--%>
 	
 	<table class="table table-striped">
 	  <thead>
@@ -74,6 +100,7 @@
 	      <th class="success">Date de Fin</th>
 	      <th class="success">etat de la reservation</th>
 	      <th class="success">Nom de l'Employe ayant fait la reservation</th>
+	       <th class="success">Chambre reservee</th>
 	    </tr>
 	  </thead>
 	  <tbody>
@@ -93,7 +120,7 @@
 	    </tr>
 	    </c:forEach>  
 	  </tbody>
-	</table>
+	</table> 
 	
 </body>
 </html>

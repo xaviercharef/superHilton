@@ -7,8 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.gestionHotel.hilton.Metier.InterfMetierChambre;
 import com.gestionHotel.hilton.Metier.InterfMetierPersonne;
 import com.gestionHotel.hilton.Metier.ReservationInterfMetier;
+import com.gestionHotel.hilton.entities.Chambre;
+import com.gestionHotel.hilton.entities.Client;
+import com.gestionHotel.hilton.entities.Employe;
 import com.gestionHotel.hilton.entities.Reservation;
 
 @org.springframework.stereotype.Controller
@@ -19,6 +23,9 @@ public class ControllerReservation {
 	
 	@Autowired
 	private InterfMetierPersonne metierP;
+	
+	@Autowired
+	private InterfMetierChambre metierCh;
 
 	@RequestMapping(value="/")
 	public String accueil(Model model){
@@ -27,17 +34,30 @@ public class ControllerReservation {
 	
 	@RequestMapping(value="/Reservation")
 	public String reservation(Model model){
-		model.addAttribute("allClient", metierP.getAllClient());
+		model.addAttribute("allClient",metierP.getAllClient());
+		model.addAttribute("allEmploye",metierP.getAllEmploye());
 		model.addAttribute("allRes", metierR.getListReservation());
+		model.addAttribute("allCh", metierCh.getAllChambre());
 		return "Reservation";
 	}
 	
 	@RequestMapping(value="/enregistrerReservation")
-	public String enregistrerReservation(Model model,Long idClient,Long idChambre, Long idEmploye){
-		
-		Reservation r = new Reservation();
+	public String enregistrerReservation(Model model,Reservation r,Long idClient,Long idChambre, Long idEmploye){
+		model.addAttribute("allClient", metierP.getAllClient());
+		model.addAttribute("allEmploye",metierP.getAllEmploye());
+		model.addAttribute("allCh", metierCh.getAllChambre());
+	/*	Employe e=(Employe) metierP.getPersonne(idEmploye);
+		Client c= (Client) metierP.getPersonne(idClient);
+		Chambre ch=metierCh.getChambre(idChambre);*/
 		metierR.addReservationParClientParEmploye(idClient, idChambre, r, idEmploye);
 		model.addAttribute("allRes", metierR.getListReservation());
+		/*Long idChambre= Long.parseLong(arg0)
+		Reservation r = new Reservation();
+		Long idClient=metierP.getIdPersonne(nomClient);
+		Long idEmploye=metierP.getIdPersonne(nomEmploye);
+		metierR.addReservationParClientParEmploye(idClient, idChambre, r, idEmploye);
+		model.addAttribute("allRes", metierR.getListReservation());
+		return "Reservation";*/
 		return "Reservation";
 	}
 	

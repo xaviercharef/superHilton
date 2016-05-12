@@ -72,4 +72,10 @@ private EntityManager em ;
  	return r.getDateFin();
  }
 
+@Override
+public List<Chambre> getAllChambre() {
+	Query req =em.createQuery("from Chambre c");
+	return req.getResultList();
+}
+
 }

@@ -21,21 +21,28 @@ import javax.persistence.OneToMany;
  * 
  * */
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 
 @Entity
 public class Devis implements Serializable{
-	/*  Attribus  */
+	/*  Attributs  */
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 private Long idDevis;
-	@OneToOne
-private Facture facture;
+	
+	/** associations **/
+	@OneToOne(mappedBy="devis")
+	private Facture facture;
+	
 	@OneToMany
 	@JoinColumn(name="idProduit")
 	private List<Produit> tabProduit=new ArrayList<Produit>();
-	@OneToOne 
+	
+	@OneToOne
+	@PrimaryKeyJoinColumn(name="idReservation")
 	private Reservation reservation;
+	
 	/*  Constructeur*/
 	public Devis() {
 		super();

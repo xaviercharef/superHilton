@@ -32,7 +32,7 @@ public class TestPersonne {
 
 	@Test
 	public void testAddPersonne() {
-		Personne p = new Client("TestNom","TestPrenom", "TestSexe", new Date(), "TestAdresse");
+		Personne p = new Client("Dali","Salvador", "mm", new Date(), "TestAdresse");
 		metierP.addPersonne(p);
 		assertNotNull(p.getIdPersonne());
 	}
@@ -40,7 +40,7 @@ public class TestPersonne {
 	@Test
 	public void testDeletePersonne() {
 		List<Personne> list1 = metierP.getAllPersonne();
-		metierP.deletePersonne(2l);
+		metierP.deletePersonne(2L);
 		List<Personne> list2 = metierP.getAllPersonne();
 		assertTrue(list1.size()==(list2.size()+1));
 	}
@@ -48,10 +48,10 @@ public class TestPersonne {
 	@Test
 	public void testUpdatePersonne() {
 		Personne p = metierP.getPersonne(3l);
-		p.setPrenom("nouveau Prenom");
-		p.setNom("Nouveau Nom");
+		p.setPrenom("Auguste");
+		p.setNom("Renoir");
 		metierP.updatePersonne(p);
-		assertTrue(p.getPrenom()=="nouveau Prenom");
+		assertTrue(p.getPrenom()=="Auguste");
 	}
 
 	@Test

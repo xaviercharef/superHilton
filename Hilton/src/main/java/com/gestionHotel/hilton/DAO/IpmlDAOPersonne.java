@@ -35,7 +35,18 @@ public class IpmlDAOPersonne implements InterfDAOPersonne{
 		em.persist(p);
 		
 	}
-
+	/**surchage version client**/
+	public void addPersonne(Client p) {
+		em.persist(p);
+		
+	}
+	
+	/**surchage version employe**/
+	public void addPersonne(Employe p) {
+		em.persist(p);
+		
+	}
+	
 	/**Supprimer une personne de la base avec son Id**/
 	@Override
 	public void deletePersonne(Long idPersonne) {
@@ -67,14 +78,14 @@ public class IpmlDAOPersonne implements InterfDAOPersonne{
 	
 	/**Obtenir toute les clients entre dans la bases**/
 	@Override
-	public List<Client> getAllClient() {
+	public List<Personne>  getAllClient() {
 		Query req = em.createQuery("SELECT p FROM Personne p WHERE p.type=Client OR p.type=Adulte OR p.type=Enfant OR p.type=Bebe");
-		return req.getResultList();
+		return  req.getResultList();
 	}
 
 	/**Obtenir toute les employes entre dans la bases**/
 	@Override
-	public List<Employe> getAllEmploye() {
+	public List<Personne> getAllEmploye() {
 		Query req=em.createQuery("SELECT p FROM Personne p WHERE p.type=Employe");
 		return req.getResultList();
 	}

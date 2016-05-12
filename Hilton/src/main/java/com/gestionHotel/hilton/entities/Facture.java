@@ -19,6 +19,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,7 +37,7 @@ public class Facture implements Serializable {
   private Date datePaiement ;
   private String typePaiment ;
   
-  @OneToOne
+  @OneToOne(fetch= FetchType.EAGER)
   @PrimaryKeyJoinColumn(name="idDevis")
   private Devis devis ;
   

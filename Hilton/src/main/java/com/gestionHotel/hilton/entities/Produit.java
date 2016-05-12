@@ -18,7 +18,7 @@ import javax.persistence.Id;
  * */
 @Entity
 public class Produit implements Serializable{
-	/* Attribus */
+	/* Attributs */
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idProduit;

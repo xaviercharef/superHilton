@@ -131,10 +131,10 @@ public class ReservationImplDAO implements ReservationInterfDAO{
 	}
 
 	@Override
-	public void addReservationParClientParEmploye(Long idClient,Long idChambre,Reservation r, Long idEmploye) {
+	public void addReservationParClientParEmploye(Long idPersonne,Long idChambre,Reservation r, Long idEmploye) {
 	
 		Chambre ch=em.find(Chambre.class, idChambre);
-		Client c=em.find(Client.class, idClient);
+		Client c=em.find(Client.class, idPersonne);
 		Employe e=em.find(Employe.class, idEmploye);
 		r.setClient(c);
 		c.getListResa().add(r);
@@ -144,7 +144,10 @@ public class ReservationImplDAO implements ReservationInterfDAO{
 
 		r.getListeChambre().add(ch);
 		ch.getListReservation().add(r);
+		
 		em.persist(r);
+		em.merge(c);
+		em.merge(e);
 		
 	}
 

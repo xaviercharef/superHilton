@@ -27,7 +27,7 @@ public class Client extends Personne implements Serializable {
 
 	
 	/**Association**/
-	@OneToMany
+	@OneToMany(mappedBy="client")
 	private List<Reservation> listResa;
 	
 	/**Constructor**/

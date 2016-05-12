@@ -26,7 +26,7 @@ import javax.persistence.OneToMany;
 public class Employe extends Personne implements Serializable{
 
 	/**Association**/
-	@OneToMany
+	@OneToMany(mappedBy="employe")
 	private List<Reservation> listResa;
 	
 	/**Constructeur**/

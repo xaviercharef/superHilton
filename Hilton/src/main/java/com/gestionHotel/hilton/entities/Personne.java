@@ -5,13 +5,13 @@ import java.util.Date;
 
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -29,12 +29,13 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 
 @Entity
-@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="TypePersonne",discriminatorType=DiscriminatorType.STRING)
 public abstract class Personne implements Serializable {
 	
 	/**Attribut**/
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	protected Long idPersonne;
 	
 	protected String nom;

@@ -30,4 +30,5 @@ public interface InterfMetierChambre {
      public Date getDatedebut(Long idReservation);
      public Date getDateFin(Long idReservation);
      public List<Chambre> getListChambreLibre(Date début, Date Fin);
+     public List<Chambre> getAllChambre();
 }

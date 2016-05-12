@@ -106,4 +106,12 @@ private final Logger LOG=Logger.getLogger("ImplMetierChambre");
  	return chamli; 
  }
 
+
+@Override
+public List<Chambre> getAllChambre() {
+	return daoChambre.getAllChambre();
+}
+ 
+ 
+
 }

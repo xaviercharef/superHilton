@@ -18,6 +18,7 @@ import com.gestionHotel.hilton.Metier.ReservationInterfMetier;
 import com.gestionHotel.hilton.entities.Chambre;
 import com.gestionHotel.hilton.entities.Client;
 import com.gestionHotel.hilton.entities.Employe;
+import com.gestionHotel.hilton.entities.Personne;
 import com.gestionHotel.hilton.entities.Reservation;
 
 public class ReservationTest {
@@ -49,17 +50,17 @@ public class ReservationTest {
 
 	@Test
 	public void testAddReservationParClientParEmploye() {
-		Client c= new Client();
+	Client c= new Client("Picasso","Pablo","M",new Date(),"lalala");
 		metierP.addPersonne(c);
 		
 		Chambre ch1= new Chambre();
 		metierCh.addChambre(ch1);
 		
-		Employe e= new Employe();
+		Employe e= new Employe("Renoir","Auguste","M",new Date(),"ririri");
 		metierP.addPersonne(e);
 		
 		Reservation r= new Reservation();
-		metierR.addReservationParClientParEmploye(c.getIdPersonne(), ch1.getIdChambre() ,r , e.getIdPersonne());
+		metierR.addReservationParClientParEmploye(1L, ch1.getIdChambre() ,r , 2L);
 		List<Reservation> list=metierR.getListReservation();
 			if(list.get(list.size()-1)!=null){
 		assertTrue(true);
@@ -76,7 +77,7 @@ public class ReservationTest {
 
 	@Test
 	public void testGetReservation() {
-		Reservation r=metierR.getReservation(2L);
+		Reservation r=metierR.getReservation(3L);
 		assertNotNull(r);
 	}
 
@@ -127,7 +128,7 @@ public class ReservationTest {
 	public void testSetReservation() {
 		List<Long> list= new ArrayList<Long>();
 		list.add(1L);
-		metierR.setReservation(5L, 1L, list, new Date(), new Date(), "lololo", 2L);
+		metierR.setReservation(5L, 1L, list, new Date(), new Date(), "en cours", 2L);
 		assertTrue(true);
 	}
 

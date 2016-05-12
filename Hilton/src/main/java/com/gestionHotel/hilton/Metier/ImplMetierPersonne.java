@@ -66,13 +66,13 @@ public class ImplMetierPersonne implements InterfMetierPersonne{
 	
 	/**Obtenir toute les clients entre dans la bases**/
 	@Override
-	public List<Client> getAllClient() {
+	public List<Personne> getAllClient() {
 		return daoPers.getAllClient();
 	}
 
 	/**Obtenir toute les employes entre dans la bases**/
 	@Override
-	public List<Employe> getAllEmploye() {
+	public List<Personne> getAllEmploye() {
 		return daoPers.getAllEmploye();
 	}
 	
@@ -99,6 +99,17 @@ public class ImplMetierPersonne implements InterfMetierPersonne{
 		return daoPers.getIdPersonne(nomPersonne);
 	}
 
+	/**surchage version client**/
+	@Override
+	public void addPersonne(Client p) {
+		daoPers.addPersonne(p);	
+	}
+	
+	/**surchage version employe**/
+	@Override
+	public void addPersonne(Employe p) {
+		daoPers.addPersonne(p);
+		}
 	
 
 }

@@ -36,14 +36,20 @@ public interface InterfDAOPersonne {
 	public List<Personne> getAllPersonne ();
 	
 	/**Obtenir toute les clients entre dans la bases**/
-	public List<Client> getAllClient();
+	public List<Personne>  getAllClient();
 	
 	/**Obtenir toute les employes entre dans la bases**/
-	public List<Employe> getAllEmploye();
+	public List<Personne> getAllEmploye();
 	
 	/**Obtenir toute les personnes possédant dans leur nom ou prenom le mot cle tapez**/
 	public List<Personne> searchPersonne (String mc);
 	
 	/**Obtenir l'id d'une personne a partir du nom**/
 	public Long getIdPersonne(String nomPersonne);
+	
+	/**surchage version employe**/
+	public void addPersonne(Employe p);
+	
+	/**surchage version client**/
+	public void addPersonne(Client p);
 }

@@ -3,6 +3,7 @@ package com.gestionHotel.hilton;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -11,7 +12,7 @@ import com.gestionHotel.hilton.entities.Client;
 import com.gestionHotel.hilton.entities.Employe;
 import com.gestionHotel.hilton.entities.Personne;
 
-@org.springframework.stereotype.Controller
+@Controller
 public class ControllerPersonne {
 	@Autowired
 	private InterfMetierPersonne metierP;
