@@ -51,9 +51,10 @@ public class ImplMetierPersonne implements InterfMetierPersonne{
 		daoPers.updatePersonne(p);
 	}
 
-	/**Obtenir une personne de la base avec son Id**/
+	/**Obtenir une personne de la base avec son Id
+	 * @throws Exception **/
 	@Override
-	public Personne getPersonne(Long idPersonne) {
+	public Personne getPersonne(Long idPersonne) throws Exception {
 		return daoPers.getPersonne(idPersonne);
 	}
 
@@ -76,9 +77,10 @@ public class ImplMetierPersonne implements InterfMetierPersonne{
 		return daoPers.getAllEmploye();
 	}
 	
-	/**Obtenir toute les personnes possédant dans leur nom ou prenom le mot cle tapez**/
+	/**Obtenir toute les personnes possédant dans leur nom ou prenom le mot cle tapez
+	 * @throws Exception **/
 	@Override
-	public List<Personne> searchPersonne(String mc) {
+	public List<Personne> searchPersonne(String mc) throws Exception {
 		return daoPers.searchPersonne(mc);
 	}
 
@@ -94,8 +96,7 @@ public class ImplMetierPersonne implements InterfMetierPersonne{
 	}
 
 	@Override
-	public Long getIdPersonne(String nomPersonne) {
-		// TODO Auto-generated method stub
+	public Long getIdPersonne(String nomPersonne) throws Exception {
 		return daoPers.getIdPersonne(nomPersonne);
 	}
 

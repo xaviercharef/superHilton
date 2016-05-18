@@ -23,10 +23,9 @@ public interface InterfDAOChambre {
     public Long addChambre(Chambre c);
     public void deleteChambre(Long idChambre);
     public void updateChambre(Chambre c);
-    public Chambre getChambre(Long idChambre);
+    public Chambre getChambre(Long idChambre) throws Exception;
     public List<Chambre> ListChambre();
-    public Date getDatedebut(Long idReservation);
-    public Date getDateFin(Long idReservation);
     public List<Chambre> getAllChambre();
+  /*  public List<Chambre> getChambreLibreSurPeriode(Date debut,Date fin);*/
     
 }

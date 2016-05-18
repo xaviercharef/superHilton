@@ -20,14 +20,14 @@ public interface ReservationInterfMetier {
 	public void addReservation(Reservation r);
 	public void addReservationParClientParEmploye(Long idClient,Long idChambre,Reservation r, Long idEmploye);
 	public List<Reservation> getListReservation();
-	public Reservation getReservation(Long idReservation);
+	public Reservation getReservation(Long idReservation) throws Exception;
 	public void suppReservation(Long idReservation);
-	public List<Reservation> getReservationParEmploye(Long idEmploye);
-	public List<Reservation> getReservationParClient(Long idClient);
-	public List<Reservation> getReservationParChambre(Long idChambre);
-	public Employe getEmployeParReservation(Long idReservation);
-	public Client getClientParReservation(Long idReservation);
-	public List<Chambre> getChambresParReservation(Long idReservation);
+	public List<Reservation> getReservationParEmploye(Long idEmploye) throws Exception;
+	public List<Reservation> getReservationParClient(Long idClient) throws Exception;
+	public List<Reservation> getReservationParChambre(Long idChambre) throws Exception;
+	public Employe getEmployeParReservation(Long idReservation) throws Exception;
+	public Client getClientParReservation(Long idReservation) throws Exception;
+	public List<Chambre> getChambresParReservation(Long idReservation) throws Exception;
 	public void setReservation(Long idReservation,Long idClient, List<Long> listIdChambre,Date debut,Date fin,String etat,Long idEmploye);
 	
 }

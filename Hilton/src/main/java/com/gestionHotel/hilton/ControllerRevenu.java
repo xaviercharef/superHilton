@@ -20,24 +20,24 @@ public class ControllerRevenu {
 	
 	@RequestMapping(value="/choixAction")
 	public String choixAction(Model model, String typeTableRevenu){
-		if (typeTableRevenu=="allRevenu"){
+		String type = typeTableRevenu;
+		if (type=="allRevenu"){
 			model.addAttribute("revResa", metierRev.revenuTotalReservation());
 			model.addAttribute("revProd", metierRev.revenuTotalProduit());		
 			model.addAttribute("revTotal", metierRev.revenuTotal());
 		}
-		else if (typeTableRevenu=="revenuEnCours"){
+		else if (type=="revenuEnCours"){
 			Integer annee = (int) ((int)new Date().getTime()/(1000*3600*24*365.25));
 			model.addAttribute("revResa", metierRev.revenuTotalReservationParAnnee(annee));
 			model.addAttribute("revProd", metierRev.revenuTotalProduitParAnnee(annee));		
 			model.addAttribute("revTotal", metierRev.revenuTotalParAnnee(annee));
 		}
-		String type = typeTableRevenu;
 		model.addAttribute("action", type);
 		return "Revenu";
 	}
 	
-	@RequestMapping(value="revenuParAnne")
-	public String revenuParAnne(Model model, Integer annee){
+	@RequestMapping(value="/revenuParAnne")
+	public String revenuParAnne(Model model, int annee){
 		model.addAttribute("revResa", metierRev.revenuTotalReservationParAnnee(annee));
 		model.addAttribute("revProd", metierRev.revenuTotalProduitParAnnee(annee));		
 		model.addAttribute("revTotal", metierRev.revenuTotalParAnnee(annee));

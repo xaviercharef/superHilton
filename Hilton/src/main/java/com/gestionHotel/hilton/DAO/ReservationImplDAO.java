@@ -48,8 +48,10 @@ public class ReservationImplDAO implements ReservationInterfDAO{
 	}
 
 	@Override
-	public Reservation getReservation(Long idReservation) {
-		Reservation r=em.find(Reservation.class, idReservation);
+	public Reservation getReservation(Long idReservation) throws Exception {
+		Reservation r = null;
+		r = em.find(Reservation.class, idReservation);
+		if(r == null) throw new Exception("Pas de reservations trouvees");
 		return r;
 	}
 
@@ -60,44 +62,55 @@ public class ReservationImplDAO implements ReservationInterfDAO{
 	}
 
 	@Override
-	public List<Reservation> getReservationParEmploye(Long idEmploye) {
+	public List<Reservation> getReservationParEmploye(Long idEmploye) throws Exception{
+		List<Reservation> list= new ArrayList<Reservation>();
 		Query query= em.createQuery("select r from Reservation r where r.employe.idPersonne= :x");
 		query.setParameter("x", idEmploye);
-		return query.getResultList();
+		list= query.getResultList();
+		if(list.isEmpty())throw new Exception("Pas de reservations trouvees");
+		return list;
 	}
 
 	@Override
-	public List<Reservation> getReservationParClient(Long idClient) {
+	public List<Reservation> getReservationParClient(Long idClient) throws Exception{
+		List<Reservation> list= new ArrayList<Reservation>();
 		Query query= em.createQuery("select r from Reservation r where r.client.idPersonne=:x");
 		query.setParameter("x", idClient);
 		return query.getResultList();
 	}
 
 	@Override
-	public List<Reservation> getReservationParChambre(Long idChambre) {
+	public List<Reservation> getReservationParChambre(Long idChambre) throws Exception{
 		Chambre ch= em.find(Chambre.class, idChambre);
 		List<Reservation> list= ch.getListReservation();
+		if(list.size()==0)throw new Exception("Pas de reservations trouvees");
 		return list;
 	}
 
 	@Override
-	public Employe getEmployeParReservation(Long idReservation) {
+	public Employe getEmployeParReservation(Long idReservation) throws Exception{
+		Employe e=null;
 		Reservation r= em.find(Reservation.class, idReservation);
-		Employe e=  r.getEmploye();
+		e=  r.getEmploye();
+		if(e==null) throw new Exception("pas d'employe trouve");
 		return e;
 	}
 
 	@Override
-	public Client getClientParReservation(Long idReservation) {
+	public Client getClientParReservation(Long idReservation) throws Exception{
+		Client c= null;
 		Reservation r= em.find(Reservation.class, idReservation);
-		Client c=  r.getClient();
+		c=  r.getClient();
+		if(c==null) throw new Exception("pas de client trouve");
 		return c;
 	}
 
 	@Override
-	public List<Chambre> getChambresParReservation(Long idReservation) {
+	public List<Chambre> getChambresParReservation(Long idReservation) throws Exception{
+		List<Chambre> list= new ArrayList<Chambre>();
 		Reservation r= em.find(Reservation.class, idReservation);
-		List<Chambre> list= r.getListeChambre();
+		list= r.getListeChambre();
+		if(list.isEmpty())throw new Exception("Pas de chambres trouvees");
 		return list;
 	}
 
@@ -107,10 +120,12 @@ public class ReservationImplDAO implements ReservationInterfDAO{
 		Client c=em.find(Client.class, idClient);
 		Employe e=em.find(Employe.class, idEmploye);
 		List<Chambre> list= new ArrayList<Chambre>();
+		
 		for(Long l:listIdChambre){
 			Chambre ch=em.find(Chambre.class, l);
 			list.add(ch);
 		}
+		
 		r.setClient(c);
 		c.getListResa().add(r);
 		
@@ -127,7 +142,9 @@ public class ReservationImplDAO implements ReservationInterfDAO{
 		
 		r.setEtatReservation(etat);
 		
-		em.merge(r);
+		em.persist(r);
+		em.merge(c);
+		em.merge(e);
 	}
 
 	@Override

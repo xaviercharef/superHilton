@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,14 +33,14 @@ public class Devis implements Serializable{
 private Long idDevis;
 	
 	/** associations **/
-	@OneToOne(mappedBy="devis")
+	@OneToOne(mappedBy="devis", fetch=FetchType.EAGER)
 	private Facture facture;
 	
-	@OneToMany
+	@OneToMany(fetch=FetchType.EAGER)
 	@JoinColumn(name="idProduit")
 	private List<Produit> tabProduit=new ArrayList<Produit>();
 	
-	@OneToOne
+	@OneToOne (fetch=FetchType.EAGER)
 	@PrimaryKeyJoinColumn(name="idReservation")
 	private Reservation reservation;
 	

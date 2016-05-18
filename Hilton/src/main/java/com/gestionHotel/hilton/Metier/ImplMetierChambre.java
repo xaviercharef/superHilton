@@ -60,50 +60,41 @@ private final Logger LOG=Logger.getLogger("ImplMetierChambre");
  }
 
  @Override
- public Chambre getChambre(Long idChambre) {
-  // TODO Auto-generated method stub
+ public Chambre getChambre(Long idChambre) throws Exception{
   return daoChambre.getChambre(idChambre);
  }
 
- @Override
- public List<Chambre> ListChambre() {
-  // TODO Auto-generated method stub
-  return daoChambre.ListChambre();
- }
  
  @Override
- public Date getDatedebut(Long idReservation) {
- 	// TODO Auto-generated method stub
- 	return daoChambre.getDatedebut(idReservation);
- }
-
- @Override
- public Date getDateFin(Long idReservation) {
- 	// TODO Auto-generated method stub
- 	return daoChambre.getDateFin(idReservation);
- }
-
- @Override
- public List<Chambre> getListChambreLibre(Date debut, Date fin) {
- 	List<Chambre> chamli=new ArrayList<Chambre>();
- 	for(Chambre c:daoChambre.ListChambre()){
- 		if(c.getListReservation().size()==0){
- 			chamli.add(c);
+ public List<Chambre> getListChambreLibreSurPeriode(Date periodeDebut, Date periodeFin) throws Exception{
+	 
+	if( periodeDebut.getTime() < periodeFin.getTime() ) throw new Exception("Incorrect: La date de fin est plus petite que la date de debut");
+	
+ 	List<Chambre> chamlib = new ArrayList<Chambre>();
+ 	for( Chambre c : daoChambre.ListChambre() ){
+ 		if( c.getListReservation().size() == 0 ){
+ 			chamlib.add(c);
  		}
- 		else{int i=0;
- 			for(Reservation r:c.getListReservation()){
- 			if(debut.getTime()>daoChambre.getDatedebut(r.getIdReservation()).getTime() & debut.getTime()<daoChambre.getDateFin(r.getIdReservation()).getTime()
- 					|| fin.getTime()>daoChambre.getDatedebut(r.getIdReservation()).getTime() & fin.getTime()<daoChambre.getDateFin(r.getIdReservation()).getTime()){
- 				i=1;
+ 		else{
+ 			boolean reservDejaPresente=false;
+ 			for(Reservation r : c.getListReservation()){
+ 			if( ( ( r.getDateDebut().getTime() > periodeDebut.getTime() )
+ 					&& ( r.getDateDebut().getTime() < periodeFin.getTime() ) )
+ 				|| ( ( r.getDateFin().getTime() > periodeDebut.getTime() ) 
+ 					&& ( r.getDateFin().getTime() < periodeFin.getTime() ) ) 
+ 				|| ( ( r.getDateDebut().getTime() < periodeDebut.getTime() ) 
+ 					&& ( r.getDateFin().getTime() > periodeFin.getTime() ) ) ){
+ 				reservDejaPresente=true;
  			}
- 			if(i==1) break;
+ 			if(reservDejaPresente==true) break;
  			}
- 			if(i==0){
- 				chamli.add(c);
+ 			if(reservDejaPresente==false){
+ 				chamlib.add(c);
  			}
  		}
  	}
- 	return chamli; 
+ 	if(chamlib.isEmpty()) throw new Exception("Il n'y a pas de chambre disponible");
+ 	return chamlib; 
  }
 
 

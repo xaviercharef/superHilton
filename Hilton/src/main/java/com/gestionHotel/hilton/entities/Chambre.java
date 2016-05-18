@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,7 +37,10 @@ public class Chambre implements Serializable {
    private Double prix ;
    private String description ; 
    
-   @ManyToMany(mappedBy="listeChambre")
+   private String exception ;
+   
+
+@ManyToMany(mappedBy="listeChambre", fetch=FetchType.EAGER)
    List<Reservation> listReservation= new ArrayList<Reservation>();
 
    /** Constructeurs **/
@@ -84,4 +88,11 @@ public String getDescription() {
 public void setDescription(String description) {
  this.description = description;
 }
+public String getException() {
+	return exception;
+}
+public void setException(String exception) {
+	this.exception = exception;
+}
+
 }

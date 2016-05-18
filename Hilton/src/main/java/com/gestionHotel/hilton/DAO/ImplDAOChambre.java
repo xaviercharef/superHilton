@@ -13,6 +13,7 @@
 
 package com.gestionHotel.hilton.DAO;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -31,27 +32,29 @@ private EntityManager em ;
 
  @Override
  public Long addChambre(Chambre c) {
-  em.persist(c);
-  return c.getIdChambre();
+	 em.persist(c);
+	 return c.getIdChambre();
  }
 
  @Override
  public void deleteChambre(Long idChambre) {
-  Chambre c = em.find(Chambre.class, idChambre);
-  em.remove(c);
-  
+	 Chambre c = em.find(Chambre.class, idChambre);
+	 em.remove(c);
  }
 
  @Override
  public void updateChambre(Chambre c) {
-  em.merge(c);
-  
+	 em.merge(c);
  }
 
  @Override
- public Chambre getChambre(Long idChambre) {
+ public Chambre getChambre(Long idChambre) throws Exception {
+	 
+	 Chambre c=null;
+	 c=em.find(Chambre.class, idChambre);
   
-  return em.find(Chambre.class, idChambre);
+	 if(c==null) throw new Exception("La chambre n'a pas ete trouve");
+	 return c;
  }
 
  @Override
@@ -59,23 +62,20 @@ private EntityManager em ;
   Query req =em.createQuery("Select c from Chambre c ");
   return req.getResultList();
  }
+
  
- @Override
- public Date getDatedebut(Long idReservation) {
- 	Reservation r=em.find(Reservation.class, idReservation);
- 	return r.getDateDebut();
- }
-
- @Override
- public Date getDateFin(Long idReservation) {
- 	Reservation r=em.find(Reservation.class, idReservation);
- 	return r.getDateFin();
- }
-
 @Override
-public List<Chambre> getAllChambre() {
+public List<Chambre> getAllChambre(){
 	Query req =em.createQuery("from Chambre c");
 	return req.getResultList();
 }
+/*
+@Override
+public List<Chambre> getChambreLibreSurPeriode(Date debut, Date fin) {
+	List<Chambre> listLib= new ArrayList<Chambre>();
+	List<Chambre> preListLib= new ArrayList<Chambre>();
+	Query req= em.createQuery("select c from Chambre c inner join c.reservation.id join"); 
+	return null;
+}*/
 
 }

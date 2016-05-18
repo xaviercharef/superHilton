@@ -17,6 +17,7 @@
 		</h2>
 	</div>
 	
+	<div>
 	<form action="choixAction" method="post">
 		<select name="typeTableRevenu">
 			<div>
@@ -30,14 +31,14 @@
 		<input type="submit" name="Consulter">
 	</form>
 	
-	<c:if test="${action='revenuParAnne'}">
+	<c:if test="${action=='revenuParAnne'}">
 		<form action="revenuParAnne" method="post">
 			<label for="revenu">Quelle annee souhaitez vous consulter</label>
 			<input type="number" value="annee" placeholder="Annee">
 			<input type="submit" name="Consulter">
 		</form>
 	</c:if>
-
+	</div>
 
 	<div>
 	<h3>Table des revenus</h3>

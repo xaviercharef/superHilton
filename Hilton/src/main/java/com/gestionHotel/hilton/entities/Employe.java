@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 
 /**
@@ -26,7 +27,7 @@ import javax.persistence.OneToMany;
 public class Employe extends Personne implements Serializable{
 
 	/**Association**/
-	@OneToMany(mappedBy="employe")
+	@OneToMany(mappedBy="employe",fetch=FetchType.EAGER)
 	private List<Reservation> listResa;
 	
 	/**Constructeur**/

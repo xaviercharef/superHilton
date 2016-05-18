@@ -15,17 +15,17 @@ public class ImplDAODevisProduit implements InterfDAODevisProduit{
 
 	@PersistenceContext
     private EntityManager em;
+	
+	
 	@Override
 	public List<Produit> getListProduit() {
 		Query req=(Query) em.createQuery("from Produit");
-		return req.getResultList();
-		
+		return req.getResultList();	
 	}
 
 	@Override
 	public void addProduit(Produit p) {
 		em.persist(p);
-		
 	}
 
 	@Override
@@ -69,8 +69,7 @@ public class ImplDAODevisProduit implements InterfDAODevisProduit{
 	@Override
 	public Produit getProduit(Long idProduit) {
 		Produit p=em.find(Produit.class,idProduit);
-		return p;
-		
+		return p;	
 	}
 
 	@Override

@@ -19,8 +19,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 /**
  * @author Xavier Charef
@@ -38,12 +44,16 @@ public class Reservation implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idReservation;
-	@DateTimeFormat(pattern="dd/MM/yyyy")
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@Temporal(TemporalType.DATE)
 	private Date dateDebut;
-	@DateTimeFormat(pattern="dd/MM/yyyy")
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@Temporal(TemporalType.DATE)
 	private Date dateFin;
 	private String etatReservation;
 	
+	@Transient
+	private String exception;
 	
 	/** Associations **/
 	
@@ -102,22 +112,37 @@ public class Reservation implements Serializable{
 	public void setEtatReservation(String etatReservation) {
 		this.etatReservation = etatReservation;
 	}
+	@JsonIgnore
 	public List<Chambre> getListeChambre() {
 		return listeChambre;
 	}
+	@JsonSetter
 	public void setListeChambre(List<Chambre> listeChambre) {
 		this.listeChambre = listeChambre;
 	}
+	@JsonIgnore
 	public Client getClient() {
 		return client;
 	}
+	@JsonSetter
 	public void setClient(Client client) {
 		this.client = client;
 	}
+	@JsonIgnore
 	public Employe getEmploye() {
 		return employe;
 	}
+	@JsonSetter
 	public void setEmploye(Employe employe) {
 		this.employe = employe;
 	}
+
+	public String getException() {
+		return exception;
+	}
+
+	public void setException(String exception) {
+		this.exception = exception;
+	}
+	
 }

@@ -1,4 +1,4 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -20,15 +20,15 @@
 				<option value="Default" selected="selected"></option>
 				<option value="AffAll">Afficher toutes les personnes enregistrées</option>
 				<option value="AffClient">Afficher la liste des clients</option>
-				<option value="AffEmploye">Afficher la liste des employe</option>
+				<option value="AffEmploye">Afficher la liste des employes</option>
 				<option value="SearchClientEmploye">Rechercher une personne par mot cle</option>
-				<option value="GetPersonne">Chercher une personne avec sont identifiant</option>
-				<option value="AddClient">Ajouter un Client</option>
-				<option value="DelClient">Supprimer un client</option>
-				<option value="UpdateClient">Mettre à jour un client</option>
-				<option value="AddEmploye">Ajouter un Client</option>
-				<option value="DelEmploye">Supprimer un client</option>
-				<option value="UpdateEmploye">Mettre à jour un client</option>
+				<option value="GetPersonne">Chercher une personne avec son identifiant</option>
+				<option value="AddClient">Ajouter un client</option>
+				<!-- <option value="DelClient">Supprimer un client</option>
+				<option value="UpdateClient">Mettre à jour un client</option> -->
+				<option value="AddEmploye">Ajouter un employe</option>
+				<!-- <option value="DelEmploye">Supprimer un employe</option>
+				<option value="UpdateEmploye">Mettre à jour un employe</option> -->
 			</select>
 			<input type="submit" value="Formulaire">
 		</form>
@@ -55,7 +55,8 @@
 				<input type="text" name="nom" placeholder="Nom">
 				<input type="text" name="prenom" placeholder="Prenom">
 				<input type="text" name="sexe" placeholder="Sexe">
-				<input type="date" name="dateDeNaissance" placeholder="Date de naissance">
+				<input type="text" name="dateDeNaissance" placeholder="jj/mm/aaaa" id="client"> <!-- class="form-control" -->
+				<!-- <input type="date" name="dateDeNaissance" placeholder="Date de naissance"> -->
 				<input type="text" name="adresse" placeholder="Adresse">
 				<input type="text" name="tel" placeholder="Numero de telephone">
 				<input type="text" name="mail" placeholder="Adresse E-mail">
@@ -64,7 +65,7 @@
 			</form>
 		</c:if>
 		
-		<c:if test="${typeOpe=='DelClient'}">
+		<%-- <c:if test="${typeOpe=='DelClient'}">
 			<form action="delClient" method="post">
 				<label for="client">Supprimer un client</label>
 				<input type="text" name="id" placeholder="Identifiant">
@@ -79,14 +80,15 @@
 				<input type="text" name="nom" placeholder="Nom">
 				<input type="text" name="prenom" placeholder="Prenom">
 				<input type="text" name="sexe" placeholder="Sexe">
-				<input type="date" name="dateDeNaissance" placeholder="Date de naissance">
+				<input type="text" name="dateDeNaissance" placeholder="jj/mm/aaaa" id="client" class="form-control"/> 
+				<!-- <input type="date" name="dateDeNaissance" placeholder="Date de naissance"> -->
 				<input type="text" name="adresse" placeholder="Adresse">
 				<input type="text" name="tel" placeholder="Numero de telephone">
 				<input type="text" name="mail" placeholder="Adresse E-mail">
 				
 				<input type="submit" value="MaJ">
 			</form>
-		</c:if>
+		</c:if> --%>
 		
 		<c:if test="${typeOpe=='AddEmploye'}">
 			<form action="addEmploye" method="post">
@@ -94,7 +96,8 @@
 				<input type="text" name="nom" placeholder="Nom">
 				<input type="text" name="prenom" placeholder="Prenom">
 				<input type="text" name="sexe" placeholder="Sexe">
-				<input type="date" name="dateDeNaissance" placeholder="Date de naissance">
+				<input type="text" name="dateDeNaissance" placeholder="jj/mm/aaaa" id="client"/> 
+				<!-- <input type="date" name="dateDeNaissance" placeholder="Date de naissance"> -->
 				<input type="text" name="adresse" placeholder="Adresse">
 				<input type="text" name="tel" placeholder="Numero de telephone">
 				<input type="text" name="mail" placeholder="Adresse E-mail">
@@ -103,7 +106,7 @@
 			</form>
 		</c:if>
 		
-		<c:if test="${typeOpe=='DelEmploye'}">
+		<%-- <c:if test="${typeOpe=='DelEmploye'}">
 		<form action="delEmploye" method="post">
 				<label for="client">Supprimer un employer</label>
 				<input type="text" name="id" placeholder="Identifiant">
@@ -118,7 +121,8 @@
 				<input type="text" name="nom" placeholder="Nom">
 				<input type="text" name="prenom" placeholder="Prenom">
 				<input type="text" name="sexe" placeholder="Sexe">
-				<input type="date" name="dateDeNaissance" placeholder="Date de naissance">
+				<input type="text" name="dateDeNaissance" placeholder="jj/mm/aaaa" id="client" class="form-control"/> 
+				<!-- <input type="date" name="dateDeNaissance" placeholder="Date de naissance"> -->
 				<input type="text" name="adresse" placeholder="Adresse">
 				<input type="text" name="tel" placeholder="Numero de telephone">
 				<input type="text" name="mail" placeholder="Adresse E-mail">
@@ -127,12 +131,13 @@
 			</form>
 		</c:if>
 	
-	</div>
+	</div> --%>
 
 	<div>
+	<c:if test="${allPers != null}" >
 	<h3> Liste de toutes les personne</h3>
-	<table>
-	    <tr>
+	<table class="table">
+	    <tr class="success">
 	      <th>Identifiant</th>
 	      <th>Type</th>
 	      <th>Nom</th>
@@ -155,16 +160,44 @@
 	      	<td>${pers.adresse}</td>
 	      	<td>${pers.tel}</td>
 	      	<td>${pers.mail}</td>
+	      	<td>
+	      		<%-- <form action="delClient" method="post">
+					<input type="hidden" value="${pers.idPersonne}">
+					<input type="submit" value="Supprimer">
+				</form>
+				<form action="getToUpdatePers" method="post">
+					<input type="hidden" value="${cli.idPersonne}">
+					<input type="submit" value="MaJ">
+				</form> --%>
+				
+	      	</td>
 	    </tr>
-	    </c:forEach>  
+	    </c:forEach>
+	    <tr>
+	    	<td>${getPers.idPersonne}</td>
+	    	<td>${getPers.type}</td>
+	  	    <td>${getPers.nom}</td>
+		    <td>${getPers.prenom}</td>
+			<td>${getPers.sexe}</td>
+	      	<td>${getPers.dateDeNaissance}</td>
+	      	<td>${getPers.adresse}</td>
+	      	<td>${getPers.tel}</td>
+	      	<td>${getPers.mail}</td>
+	      	<!-- <td>
+	      		<input type="button" name="supr"><br/>
+	      		<button> maj</button>
+	      	</td> -->
+	  	</tr>
 	  </tbody>
 	</table>
+	</c:if>
 	</div>
 	
 	<div>
+	<c:if test="${allCli != null}" >
 	<h3> Liste des clients</h3>
-	<table>
-	    <tr>
+	<table class="table">
+	    <tr class="success">
 	      <th>Identifiant</th>
 	      <th>Type</th>
 	      <th>Nom</th>
@@ -187,16 +220,29 @@
 	      	<td>${cli.adresse}</td>
 	      	<td>${cli.tel}</td>
 	      	<td>${cli.mail}</td>
+	      	<td>
+	      		<form action="delClient" method="post">
+					<input type="hidden" name="id" value="${cli.idPersonne}">
+					<input type="submit" value="Supprimer">
+				</form>
+				<form action="getToUpdatePers" method="post">
+					<input type="hidden" name="idPers" value="${cli.idPersonne}">
+					<input type="submit" value="MaJ">
+				</form>
+	      	<td>
+	      	</td>
 	    </tr>
 	    </c:forEach>  
 	  </tbody>
 	</table>
+	</c:if>
 	</div>
 	
 	<div>
+	<c:if test="${allEmpl != null}" >
 	<h3> Liste des employes</h3>
-	<table>	
-	    <tr>
+	<table class="table">	
+	    <tr class="success">
 	      <th>Identifiant</th>
 	      <th>Nom</th>
 	      <th>Prenom</th>
@@ -217,11 +263,102 @@
 	      	<td>${empl.adresse}</td>
 	      	<td>${empl.tel}</td>
 	      	<td>${empl.mail}</td>
+	      	<td>
+	      		<form action="delEmploye" method="post">
+					<input type="hidden" name="id" value="${empl.idPersonne}">
+					<input type="submit" value="Supprimer">
+				</form>
+				<form action="getToUpdatePers" method="post">
+					<input type="hidden" name="idPers" value="${empl.idPersonne}" >
+					<input type="submit" value="MaJ">
+				</form>
+				
+	      	</td>
 	    </tr>
 	    </c:forEach>  
 	  </tbody>
 	</table>
+	</c:if>
 	</div>
+	
+	<div>
+	<c:if test="${getUpdatePers != null}" >
+	<h3> Mise a jour </h3>
+	<table class="table">	
+	    <tr class="success">
+	      <th>Identifiant</th>
+	      <th>Nom</th>
+	      <th>Prenom</th>
+	      <th>Sexe</th>
+	      <th>Date de Naissance</th>
+	      <th>Adresse</th>
+	      <th>Telephone</th>
+	      <th>E-mail</th>
+	      <th></th>
+		</tr>
+	  <tbody>
+	    <tr>
+	    	<td>${getUpdatePers.idPersonne}</td>
+	  	    <td>${getUpdatePers.nom}</td>
+		    <td>${getUpdatePers.prenom}</td>
+			<td>${getUpdatePers.sexe}</td>
+	      	<td>${getUpdatePers.dateDeNaissance}</td>
+	      	<td>${getUpdatePers.adresse}</td>
+	      	<td>${getUpdatePers.tel}</td>
+	      	<td>${getUpdatePers.mail}</td>
+	      	<td>
+	    </tr>
+	    <tr>
+	    	<c:if test="${getUpdatePers.type == 'Client'}">
+	    	<form action="updateClient" method="post" id="updateClient">
+	    	<input type="hidden" name="id" value="${getUpdatePers.idPersonne}">
+	    	</form>
+	    	<td>Elément à mettre à jour</td>
+	    	<td><input type="text" name="nom" placeholder="Nom" form="updateClient"></td>
+	    	<td><input type="text" name="prenom" placeholder="Prenom" form="updateClient"></td>
+	    	<td><input type="text" name="sexe" placeholder="Sexe" form="updateClient"></td>
+	    	<td><input type="text" name="dateDeNaissance" placeholder="jj/mm/aaaa" form="updateClient"/> 
+				<!-- <input type="date" name="dateDeNaissance" placeholder="Date de naissance"> -->
+			</td>
+	    	<td><input type="text" name="adresse" placeholder="Adresse" form="updateClient"></td>
+	    	<td><input type="text" name="tel" placeholder="Numero de telephone" form="updateClient"></td>
+	    	<td><input type="text" name="mail" placeholder="Adresse E-mail" form="updateClient"></td>
+	    	<td><input type="submit" value="MaJ" form="updateClient"></td>
+			</c:if>
+			
+			
+			<c:if test="${getUpdatePers.type == 'Employe'}">
+	    	<form action="updateEmploye" method="post" id="updateEmploye">
+	    		<input type="hidden" name="id" value="${getUpdatePers.idPersonne}">
+	    	</form>
+	    	<td>Elément à mettre à jour</td>
+	    	<td><input type="text" name="nom" placeholder="Nom" form="updateEmploye"></td>
+	    	<td><input type="text" name="prenom" placeholder="Prenom" form="updateEmploye"></td>
+	    	<td><input type="text" name="sexe" placeholder="Sexe" form="updateEmploye"></td>
+	    	<td><input type="text" name="dateDeNaissance" placeholder="jj/mm/aaaa" form="updateEmploye"/> 
+				<!-- <input type="date" name="dateDeNaissance" placeholder="Date de naissance"> -->
+			</td>
+	    	<td><input type="text" name="adresse" placeholder="Adresse" form="updateEmploye"></td>
+	    	<td><input type="text" name="tel" placeholder="Numero de telephone" form="updateEmploye"></td>
+	    	<td><input type="text" name="mail" placeholder="Adresse E-mail" form="updateEmploye"></td>
+	    	<td><input type="submit" value="MaJ" form="updateEmploye"></td>
+			</c:if>
+		</tr>
+			
+
+	  </tbody>
+	</table>
+	</c:if>
+	</div>
+	
+	<div>
+		<c:if test="${ExcepPersonne != null}">
+		<br/>
+			<!-- Indicates caution should be taken with this action -->
+			<button type="button" class="btn btn-warning">${ExcepPersonne.exception}</button>
+		</c:if>
+	</div>
+
 	
 </body>
 </html>

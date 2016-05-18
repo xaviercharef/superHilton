@@ -13,6 +13,10 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
 
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
@@ -43,11 +47,15 @@ public abstract class Personne implements Serializable {
 	protected String sexe;
 	protected String type;
 	
-	@DateTimeFormat(pattern="dd/MM/yyyy")
+	//@DateTimeFormat(pattern="dd/MM/yyyy")
+	@Temporal(TemporalType.DATE)
 	protected Date dateDeNaissance;
 	protected String adresse;
 	protected String tel;
 	protected String mail;
+	
+	@Transient
+	protected String exception;
 	
 	
 	/**Getter et Setter**/
@@ -105,6 +113,13 @@ public abstract class Personne implements Serializable {
 	public void setType(String type) {
 		this.type = type;
 	}
+	public String getException() {
+		return exception;
+	}
+	public void setException(String exception) {
+		this.exception = exception;
+	}
+	
 	/**Constructor**/
 	public Personne(String nom, String prenom, String sexe,
 			Date dateDeNaissance, String adresse) {

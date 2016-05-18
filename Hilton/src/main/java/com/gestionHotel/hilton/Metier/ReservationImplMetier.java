@@ -53,43 +53,43 @@ public class ReservationImplMetier implements ReservationInterfMetier {
 	}
 
 	@Override
-	public Reservation getReservation(Long idReservation) {
+	public Reservation getReservation(Long idReservation) throws Exception {
 		return daoReserv.getReservation(idReservation);
 	}
 
 	@Override
-	public void suppReservation(Long idReservation) {
+	public void suppReservation(Long idReservation){
 		daoReserv.suppReservation(idReservation);
 		
 	}
 
 	@Override
-	public List<Reservation> getReservationParEmploye(Long idEmploye) {
+	public List<Reservation> getReservationParEmploye(Long idEmploye) throws Exception{
 		return daoReserv.getReservationParEmploye(idEmploye);
 	}
 
 	@Override
-	public List<Reservation> getReservationParClient(Long idClient) {
+	public List<Reservation> getReservationParClient(Long idClient) throws Exception{
 		return daoReserv.getReservationParClient(idClient);
 	}
 
 	@Override
-	public List<Reservation> getReservationParChambre(Long idChambre) {
+	public List<Reservation> getReservationParChambre(Long idChambre) throws Exception{
 		return daoReserv.getReservationParChambre(idChambre);
 	}
 
 	@Override
-	public Employe getEmployeParReservation(Long idReservation) {
+	public Employe getEmployeParReservation(Long idReservation) throws Exception{
 		return daoReserv.getEmployeParReservation(idReservation);
 	}
 
 	@Override
-	public Client getClientParReservation(Long idReservation) {
+	public Client getClientParReservation(Long idReservation) throws Exception{
 		return daoReserv.getClientParReservation(idReservation);
 	}
 
 	@Override
-	public List<Chambre> getChambresParReservation(Long idReservation) {
+	public List<Chambre> getChambresParReservation(Long idReservation) throws Exception{
 		return daoReserv.getChambresParReservation(idReservation);
 	}
 

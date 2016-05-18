@@ -25,10 +25,8 @@ public interface InterfMetierChambre {
      public Long addChambre(Chambre c);
      public void deleteChambre(Long idChambre);
      public void updateChambre(Chambre c);
-     public Chambre getChambre(Long idChambre);
-     public List<Chambre> ListChambre();
-     public Date getDatedebut(Long idReservation);
-     public Date getDateFin(Long idReservation);
-     public List<Chambre> getListChambreLibre(Date début, Date Fin);
+     public Chambre getChambre(Long idChambre) throws Exception;
      public List<Chambre> getAllChambre();
+     public List<Chambre> getListChambreLibreSurPeriode(Date début, Date Fin) throws Exception;
+
 }

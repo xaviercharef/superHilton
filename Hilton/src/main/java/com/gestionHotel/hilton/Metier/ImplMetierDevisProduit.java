@@ -24,20 +24,17 @@ public class ImplMetierDevisProduit implements InterfMetierDevisProduit {
 
 	@Override
 	public List<Produit> getListProduit() {
-		// TODO Auto-generated method stub
 		return daoDev.getListProduit();
 	}
 
 	@Override
 	public Produit getProduit(Long idProduit) {
-		// TODO Auto-generated method stub
 		return daoDev.getProduit(idProduit);
 	}
 
 	@Override
 	public void addProduit(Produit p) {
 		daoDev.addProduit(p);
-
 	}
 
 	@Override

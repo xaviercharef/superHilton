@@ -27,6 +27,7 @@
 	<bean id="metierD" class="com.gestionHotel.hilton.Metier.ImplMetierDevisProduit">
 		<property name="daoDev" ref="daoD"></property>
 	</bean>
+	
 	<bean id="daoRev" class="com.gestionHotel.hilton.DAO.ImplDAODevisProduit"></bean>
 	<bean id="metierRev" class="com.gestionHotel.hilton.Metier.ImplMetierRevenu">
 		<property name="daoRev" ref="daoRev"></property>

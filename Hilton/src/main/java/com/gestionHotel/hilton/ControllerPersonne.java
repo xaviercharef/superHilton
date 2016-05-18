@@ -1,5 +1,7 @@
 package com.gestionHotel.hilton;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,8 @@ public class ControllerPersonne {
 	@Autowired
 	private InterfMetierPersonne metierP;
 	
+	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+	
 	@RequestMapping(value="/Personne")
 	public String pagePersonne(Model model){
 		model.addAttribute("allPers", metierP.getAllPersonne());
@@ -25,64 +29,54 @@ public class ControllerPersonne {
 	
 	@RequestMapping(value="/typeOperation")
 	public String typeOperation(Model model, String typeOperation){
-		if (typeOperation=="AffAll"){
+		String type = typeOperation;
+		if (type.equals("AffAll")){
 			model.addAttribute("allPers", metierP.getAllPersonne());
 		}
-		else if (typeOperation=="AffClient"){
+		else if (type.equals("AffClient")){
 			model.addAttribute("allCli", metierP.getAllClient());
 		}
-		else if (typeOperation=="AffEmploye"){
+		else if (type.equals("AffEmploye")){
 			model.addAttribute("allEmpl", metierP.getAllEmploye());
 		}
-		String type = typeOperation;
 		model.addAttribute("typeOpe", type);
 		return "Personne";
 	}
 	
-	/*@RequestMapping(value="/typeOperation")
-	public String affAll(Model model, String typeOperation){
-		if (typeOperation=="AffAll"){
-			model.addAttribute("allPers", metierP.getAllPersonne());
-		}
-		return "Personne";
-	}
-	
-	@RequestMapping(value="/typeOperation")
-	public String affClient(Model model, String typeOperation){
-		if (typeOperation=="AffClient"){
-			model.addAttribute("allCli", metierP.getAllClient());
-		}
-		return "Personne";
-	}
-	
-	@RequestMapping(value="/typeOperation")
-	public String affEmploye(Model model, String typeOperation){
-		if (typeOperation=="AffEmploye"){
-			model.addAttribute("allEmpl", metierP.getAllEmploye());
-		}
-		return "Personne";
-	}*/
 	
 	@RequestMapping(value="/searchClientEmploye")
 	public String searchClientEmploye(Model model, String mc){
-			model.addAttribute("AffAll", metierP.searchPersonne(mc));
+		try{
+			model.addAttribute("allPers", metierP.searchPersonne(mc));
+		} catch (Exception e){
+			Personne p = new Client();
+			p.setException(e.getMessage());
+			model.addAttribute("ExcepPersonne", p);
+		}
 		return "Personne";
 	}
 	
 	@RequestMapping(value="/getPersonne")
 	public String getPersonne(Model model, Long id){
-			model.addAttribute("AffAll", metierP.getPersonne(id));
+			try {
+			model.addAttribute("getPers", metierP.getPersonne(id));
+			} catch (Exception e){
+				Personne p = new Client();
+				p.setException(e.getMessage());
+				model.addAttribute("ExcepPersonne", p);
+			}
 		return "Personne";
 	}
 	
-	@RequestMapping(value="/addClient")
-	public String addClient(Model model, String nom, String prenom, String sexe, Date dateDeNaissance, String adresse, String tel, String mail){
-		Client client = new Client(nom, prenom,sexe,dateDeNaissance,adresse);
+	@RequestMapping(value="/addClient")									/**OK avec temporaltype**/
+	public String addClient(Model model, String nom, String prenom, String sexe, String dateDeNaissance, /*Date dateDeNaissance,*/ String adresse, String tel, String mail) throws ParseException{
+		Date dateNaissance = dateFormat.parse(dateDeNaissance);
+		Client client = new Client(nom, prenom, sexe, dateNaissance, adresse);
 		metierP.addPersonne(client);
 		if(tel.length()>1){
 			client.setTel(tel);
 		}
-		if(tel.length()>1){
+		if(mail.length()>1){
 			client.setMail(mail);
 		}
 		model.addAttribute("allCli", metierP.getAllClient());
@@ -96,9 +90,9 @@ public class ControllerPersonne {
 		return "Personne";
 	}
 	
-	@RequestMapping(value="/updateClient")
-	public String updateClient(Model model, Long id, String nom, String prenom, String sexe, Date dateDeNaissance, String adresse, String tel, String mail){
-		Personne client = metierP.getPersonne(id);
+	@RequestMapping(value="/updateClient")								/**OK avec temporaltype**/
+	public String updateClient(Model model, Long id, String nom, String prenom, String sexe, String dateDeNaissance, /*Date dateDeNaissance,*/ String adresse, String tel, String mail) throws ParseException{
+		try {Personne client = metierP.getPersonne(id);
 		if(nom.length()>1){
 			client.setNom(nom);
 		}
@@ -108,8 +102,9 @@ public class ControllerPersonne {
 		if(sexe.length()>1){
 			client.setSexe(sexe);
 		}
-		if(dateDeNaissance.getTime()>1l){
-			client.setDateDeNaissance(dateDeNaissance);
+		if(dateDeNaissance.length()>0){		
+			Date dateNaissance = dateFormat.parse(dateDeNaissance);
+			client.setDateDeNaissance(dateNaissance);
 		}
 		if(adresse.length()>1){
 			client.setAdresse(adresse);
@@ -122,12 +117,18 @@ public class ControllerPersonne {
 		}
 		metierP.updatePersonne(client);
 		model.addAttribute("allCli", metierP.getAllClient());
+		}catch (Exception e){
+			Personne p = new Client();
+			p.setException(e.getMessage());
+			model.addAttribute("ExcepPersonne", p);
+		}
 		return "Personne";
 	}
 	
-	@RequestMapping(value="/addEmploye")
-	public String addEmploye(Model model, String nom, String prenom, String sexe, Date dateDeNaissance, String adresse, String tel, String mail){
-		Employe employe = new Employe(nom, prenom,sexe,dateDeNaissance,adresse);
+	@RequestMapping(value="/addEmploye")									/**OK avec temporaltype**/
+	public String addEmploye(Model model, String nom, String prenom, String sexe, String dateDeNaissance, /*Date dateDeNaissance,*/ String adresse, String tel, String mail) throws ParseException{
+		Date dateNaissance = dateFormat.parse(dateDeNaissance);
+		Employe employe = new Employe(nom, prenom,sexe,dateNaissance,adresse);
 		metierP.addPersonne(employe);
 		if(tel.length()>1){
 			employe.setTel(tel);
@@ -146,8 +147,10 @@ public class ControllerPersonne {
 		return "Personne";
 	}
 	
-	@RequestMapping(value="/updateEmploye")
-	public String updateEmploye(Model model, Long id, String nom, String prenom, String sexe, Date dateDeNaissance, String adresse, String tel, String mail){
+	@RequestMapping(value="/updateEmploye")										/**OK avec temporaltype**/
+	public String updateEmploye(Model model, Long id, String nom, String prenom, String sexe, String dateDeNaissance, /*Date dateDeNaissance,*/ String adresse, String tel, String mail) throws ParseException{
+		
+		try {
 		Personne employe = metierP.getPersonne(id);
 		if(nom.length()>1){
 			employe.setNom(nom);
@@ -158,8 +161,9 @@ public class ControllerPersonne {
 		if(sexe.length()>1){
 			employe.setSexe(sexe);
 		}
-		if(dateDeNaissance.getTime()>1l){
-			employe.setDateDeNaissance(dateDeNaissance);
+		if(dateDeNaissance.length()>0){		
+			Date dateNaissance = dateFormat.parse(dateDeNaissance);
+			employe.setDateDeNaissance(dateNaissance);
 		}
 		if(adresse.length()>1){
 			employe.setAdresse(adresse);
@@ -172,7 +176,24 @@ public class ControllerPersonne {
 		}
 		metierP.updatePersonne(employe);
 		model.addAttribute("allEmpl", metierP.getAllEmploye());
+		} catch (Exception e){
+			Personne p = new Employe();
+			p.setException(e.getMessage());
+			model.addAttribute("ExcepPersonne", p);
+		}
 		return "Personne";
 	}
 	
+	@RequestMapping(value="/getToUpdatePers")
+	public String getToUpdatePers(Model model, Long idPers){
+		try {
+		model.addAttribute("getUpdatePers", metierP.getPersonne(idPers));
+		} catch (Exception e){
+			Personne p = new Client();
+			p.setException(e.getMessage());
+			model.addAttribute("ExcepPersonne", p);
+		}
+		
+		return "Personne";
+	}
 }

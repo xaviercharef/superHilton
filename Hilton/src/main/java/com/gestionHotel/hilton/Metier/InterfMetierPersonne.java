@@ -31,7 +31,7 @@ public interface InterfMetierPersonne {
 	public void updatePersonne (Personne p);
 	
 	/**Obtenir une personne de la base avec son Id**/
-	public Personne getPersonne (Long idPersonne);
+	public Personne getPersonne (Long idPersonne) throws Exception;
 	
 	/**Obtenir toute les persone entre dans la bases**/
 	public List<Personne> getAllPersonne ();
@@ -43,10 +43,10 @@ public interface InterfMetierPersonne {
 	public List<Personne> getAllEmploye();
 	
 	/**Obtenir toute les personnes possédant dans leur nom ou prenom le mot cle tapez**/
-	public List<Personne> searchPersonne (String mc);
+	public List<Personne> searchPersonne (String mc) throws Exception;
 	
 	/**Obtenir l'id d'une personne a partir du nom**/
-	public Long getIdPersonne(String nomPersonne);
+	public Long getIdPersonne(String nomPersonne) throws Exception;
 	
 	/**surchage version client**/
 	public void addPersonne(Client p);

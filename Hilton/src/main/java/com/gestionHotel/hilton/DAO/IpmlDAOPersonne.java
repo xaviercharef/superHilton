@@ -62,10 +62,12 @@ public class IpmlDAOPersonne implements InterfDAOPersonne{
 		
 	}
 
-	/**Obtenir une personne de la base avec son Id**/
+	/**Obtenir une personne de la base avec son Id
+	 * @throws Exception **/
 	@Override
-	public Personne getPersonne(Long idPersonne) {
+	public Personne getPersonne(Long idPersonne) throws Exception {
 		Personne p = em.find(Personne.class, idPersonne);
+		if (p==null) throw new Exception ("Personne introuvable");
 		return p;
 	}
 
@@ -79,14 +81,14 @@ public class IpmlDAOPersonne implements InterfDAOPersonne{
 	/**Obtenir toute les clients entre dans la bases**/
 	@Override
 	public List<Personne>  getAllClient() {
-		Query req = em.createQuery("SELECT p FROM Personne p WHERE p.type=Client OR p.type=Adulte OR p.type=Enfant OR p.type=Bebe");
+		Query req = em.createQuery("SELECT p FROM Personne p WHERE p.type='Client' OR p.type='Adulte' OR p.type='Enfant' OR p.type='Bebe'");
 		return  req.getResultList();
 	}
 
 	/**Obtenir toute les employes entre dans la bases**/
 	@Override
 	public List<Personne> getAllEmploye() {
-		Query req=em.createQuery("SELECT p FROM Personne p WHERE p.type=Employe");
+		Query req=em.createQuery("SELECT p FROM Personne p WHERE p.type='Employe'");
 		return req.getResultList();
 	}
 	

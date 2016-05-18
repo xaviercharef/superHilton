@@ -46,7 +46,7 @@ public class TestPersonne {
 	}
 
 	@Test
-	public void testUpdatePersonne() {
+	public void testUpdatePersonne() throws Exception {
 		Personne p = metierP.getPersonne(3l);
 		p.setPrenom("Auguste");
 		p.setNom("Renoir");
@@ -55,7 +55,7 @@ public class TestPersonne {
 	}
 
 	@Test
-	public void testGetPersonne() {
+	public void testGetPersonne() throws Exception {
 		Personne p = metierP.getPersonne(3l);
 		assertNotNull(p.getIdPersonne());
 	}
@@ -67,7 +67,7 @@ public class TestPersonne {
 	}
 	
 	@Test
-	public void testSearchPersonne() {
+	public void testSearchPersonne() throws Exception {
 		List<Personne> listPers = metierP.searchPersonne("no");
 		assertNotNull(listPers);
 	}
