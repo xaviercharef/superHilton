@@ -60,30 +60,34 @@ public class ImplDAODevisProduit implements InterfDAODevisProduit{
 	}
 
 	@Override
-	public List<Produit> getListProduitParDevis(Long idDevis) {
+	public List<Produit> getListProduitParDevis(Long idDevis) throws Exception{
+		List<Produit> list= new ArrayList<Produit>();
 		Query req=(Query) em.createQuery("select d.tabProduit from Devis d where d.idDevis = :x");
 		req.setParameter("x", idDevis);
-		return req.getResultList();
+		list = req.getResultList();
+		if (list.isEmpty()) throw new Exception ("Pas de produit trouvé");
+		return list;
 	}
 
 	@Override
-	public Produit getProduit(Long idProduit) {
+	public Produit getProduit(Long idProduit) throws Exception{
 		Produit p=em.find(Produit.class,idProduit);
+		if(p == null) throw new Exception("Pas de produit trouve");
 		return p;	
 	}
 
 	@Override
-	public Devis getDevis(Long idDevis) {
+	public Devis getDevis(Long idDevis) throws Exception{
 		Devis d=em.find(Devis.class, idDevis);
+		if(d == null) throw new Exception("Pas de devis trouve");
 		return d;
 	}
 
 	@Override
-	public Reservation getReservationParDevis(Long idDevis) {
+	public Reservation getReservationParDevis(Long idDevis) throws Exception{
 		Devis d=em.find(Devis.class, idDevis);
-		return d.getReservation();
+		Reservation r = d.getReservation();
+		if(r == null) throw new Exception("Pas de reservation trouvee");
+		return r;
 	}
-
 }
-
-

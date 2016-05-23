@@ -34,6 +34,7 @@ public class ReservationImplMetier implements ReservationInterfMetier {
 		LOG.info("bean realise");
 	}
 
+	/** methodes **/
 	
 	@Override
 	public void addReservation(Reservation r) {

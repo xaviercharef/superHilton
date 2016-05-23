@@ -28,7 +28,7 @@ public class ImplMetierDevisProduit implements InterfMetierDevisProduit {
 	}
 
 	@Override
-	public Produit getProduit(Long idProduit) {
+	public Produit getProduit(Long idProduit) throws Exception {
 		return daoDev.getProduit(idProduit);
 	}
 
@@ -50,7 +50,7 @@ public class ImplMetierDevisProduit implements InterfMetierDevisProduit {
 	}
 
 	@Override
-	public Devis getDevis(Long idDevis) {
+	public Devis getDevis(Long idDevis) throws Exception {
 		
 		return daoDev.getDevis(idDevis);
 	}
@@ -67,13 +67,13 @@ public class ImplMetierDevisProduit implements InterfMetierDevisProduit {
 	}
 
 	@Override
-	public List<Produit> getListProduitParDevis(Long idDevis) {
+	public List<Produit> getListProduitParDevis(Long idDevis) throws Exception {
 		
 		return daoDev.getListProduitParDevis(idDevis);
 	}
 
 	@Override
-	public Double coutReservationParDevis(Long idDevis) {
+	public Double coutReservationParDevis(Long idDevis) throws Exception {
 		Reservation r=daoDev.getReservationParDevis(idDevis);
 		Double cout=0.d;   /* ************************************* */
 		for(Chambre c: r.getListeChambre()){
@@ -86,7 +86,7 @@ public class ImplMetierDevisProduit implements InterfMetierDevisProduit {
 	
 
 	@Override
-	public Double coutProduitParDevis(Long idDevis) {
+	public Double coutProduitParDevis(Long idDevis) throws Exception {
 		List<Produit> tabp=daoDev.getListProduitParDevis(idDevis);
 		Double cout=0.d;
 		for(Produit p:tabp){
@@ -106,7 +106,7 @@ public class ImplMetierDevisProduit implements InterfMetierDevisProduit {
 	}
 
 	@Override
-	public Reservation getReservationParDevis(Long idDevis) {
+	public Reservation getReservationParDevis(Long idDevis) throws Exception {
 		// TODO Auto-generated method stub
 		return daoDev.getReservationParDevis(idDevis);
 	}

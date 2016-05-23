@@ -21,20 +21,20 @@ public interface InterfMetierRevenu {
 	/**Ajouter un devis au revenu**/
 	public void addDevisToRevenu(Devis d);
 	/**Supprimer un devis au revenu**/
-	public void removeDevisToRevenu(Long idDevis);
+	public void removeDevisToRevenu(Long idDevis)throws Exception;
 	/**Mettre a jour un devis au revenu**/
 	public void updateDevisToRevenus(Devis d);
 	
 	/**Calcul le revenu total des reservation de l hotel**/
-	public Double revenuTotalReservation();
+	public Double revenuTotalReservation()throws Exception;
 	/**Calcul le revenu total des produit de l hotel**/
-	public Double revenuTotalProduit();
+	public Double revenuTotalProduit()throws Exception;
 	/**Calcul le revenu total de l hotel**/
-	public Double revenuTotal();
+	public Double revenuTotal()throws Exception;
 	/**Calcul le revenu total des reservation durant une annee**/
-	public Double revenuTotalReservationParAnnee( Integer Annee);
+	public Double revenuTotalReservationParAnnee( Integer Annee)throws Exception;
 	/**Calcul le revenu total des produit durant une annee**/
-	public Double revenuTotalProduitParAnnee( Integer Annee);
+	public Double revenuTotalProduitParAnnee( Integer Annee)throws Exception;
 	/**Calcul le revenu total durant une annee**/
-	public Double revenuTotalParAnnee( Integer Annee);
+	public Double revenuTotalParAnnee( Integer Annee)throws Exception;
 }

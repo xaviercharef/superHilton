@@ -50,9 +50,10 @@ public class ImplDAOFacture implements InterfDAOFacture{
 	 }
 
 	 @Override
-	 public Facture getFature(Long idFacture) {
-	  // TODO Auto-generated method stub
-	  return em.find(Facture.class, idFacture) ;
+	 public Facture getFature(Long idFacture) throws Exception{
+	  Facture f = em.find(Facture.class, idFacture);
+	  if (f == null) throw new Exception ("Facture non trouvé");
+	  return f ;
 	 }
 
 	 @Override

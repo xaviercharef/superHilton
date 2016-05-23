@@ -93,20 +93,23 @@ public class IpmlDAOPersonne implements InterfDAOPersonne{
 	}
 	
 	
-	/**Obtenir toute les personnes possédant dans leur nom ou prenom le mot cle tapez**/
+	/**Obtenir toute les personnes possédant dans leur nom ou prenom le mot cle tapez
+	 * @throws Exception **/
 	@Override
-	public List<Personne> searchPersonne(String mc) {
-		Query req = em.createQuery("FROM Personne p WHERE p.nom=:x OR p.prenom=:y");
+	public List<Personne> searchPersonne(String mc) throws Exception {
+		Query req = em.createQuery("FROM Personne p WHERE p.nom LIKE :x OR p.prenom LIKE :y");
 		req.setParameter("x", "%"+mc+"%");
 		req.setParameter("y", "%"+mc+"%");
+		if (req.getResultList().size() == 0 ) throw new Exception ("Personne introuvable");
 		return req.getResultList();
 	}
 
 	@Override
-	public Long getIdPersonne(String nomPersonne) {
+	public Long getIdPersonne(String nomPersonne) throws Exception {
 		Query req= em.createQuery("From Personne p where p.nom=:x");
-		req.setParameter(1, nomPersonne);
+		req.setParameter("x", nomPersonne);
 		Personne p=(Personne) req.getResultList().get(0);
+		if (p == null) throw new Exception ("Personne introuvable");
 		return p.getIdPersonne();
 	}
 

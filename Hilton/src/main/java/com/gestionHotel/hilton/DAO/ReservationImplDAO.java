@@ -76,7 +76,9 @@ public class ReservationImplDAO implements ReservationInterfDAO{
 		List<Reservation> list= new ArrayList<Reservation>();
 		Query query= em.createQuery("select r from Reservation r where r.client.idPersonne=:x");
 		query.setParameter("x", idClient);
-		return query.getResultList();
+		list= query.getResultList();
+		if(list.isEmpty())throw new Exception("Pas de reservations trouvees");
+		return list;
 	}
 
 	@Override

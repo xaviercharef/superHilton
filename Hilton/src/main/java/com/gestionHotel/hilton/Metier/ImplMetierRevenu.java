@@ -22,9 +22,10 @@ public class ImplMetierRevenu implements InterfMetierRevenu{
 		Revenu.getListeDevis().add(d);
 	}
 
-	/**Supprimer un devis au revenu**/
+	/**Supprimer un devis au revenu
+	 * @throws Exception **/
 	@Override
-	public void removeDevisToRevenu(Long idDevis) {
+	public void removeDevisToRevenu(Long idDevis) throws Exception {
 		Devis d = daoRev.getDevis(idDevis);
 		Revenu.getListeDevis().remove(d);
 	}
@@ -41,9 +42,10 @@ public class ImplMetierRevenu implements InterfMetierRevenu{
 	}
 
 	
-	/**Calcul le revenu total des reservation de l hotel**/
+	/**Calcul le revenu total des reservation de l hotel
+	 * @throws Exception **/
 	@Override
-	public Double revenuTotalReservation() {
+	public Double revenuTotalReservation() throws Exception {
 		Double revenu=0d;
 		for(Devis d : Revenu.getListeDevis())
 		{
@@ -53,9 +55,10 @@ public class ImplMetierRevenu implements InterfMetierRevenu{
 		return revenu;
 	}
 
-	/**Calcul le revenu total des produit de l hotel**/
+	/**Calcul le revenu total des produit de l hotel
+	 * @throws Exception **/
 	@Override
-	public Double revenuTotalProduit() {
+	public Double revenuTotalProduit() throws Exception {
 		Double revenu = 0d;
 		for (Devis d : Revenu.getListeDevis()){
 			Long idDevis = d.getIdDevis();
@@ -64,16 +67,18 @@ public class ImplMetierRevenu implements InterfMetierRevenu{
 		return revenu;
 	}
 
-	/**Calcul le revenu total de l hotel**/
+	/**Calcul le revenu total de l hotel
+	 * @throws Exception **/
 	@Override
-	public Double revenuTotal() {
+	public Double revenuTotal() throws Exception {
 		Double revenu = revenuTotalProduit()+revenuTotalReservation();
 		return revenu;
 	}
 
-	/**Calcul le revenu total des reservation durant une annee**/
+	/**Calcul le revenu total des reservation durant une annee
+	 * @throws Exception **/
 	@Override
-	public Double revenuTotalReservationParAnnee(Integer annee) {
+	public Double revenuTotalReservationParAnnee(Integer annee) throws Exception {
 		Double revenu = 0d;
 		for(Devis d : Revenu.getListeDevis()){
 			if(d.getReservation().getDateDebut().getTime()> annee*1000*3600*24*365.25 && d.getReservation().getDateFin().getTime()< (annee+1)*1000*3600*24*365.25){
@@ -84,9 +89,10 @@ public class ImplMetierRevenu implements InterfMetierRevenu{
 		return revenu;
 	}
 
-	/**Calcul le revenu total des produit durant une annee**/
+	/**Calcul le revenu total des produit durant une annee
+	 * @throws Exception **/
 	@Override
-	public Double revenuTotalProduitParAnnee(Integer annee) {
+	public Double revenuTotalProduitParAnnee(Integer annee) throws Exception {
 		Double revenu = 0d;
 		for(Devis d : Revenu.getListeDevis()){
 			if(d.getReservation().getDateDebut().getTime()> annee*1000*3600*24*365.25 && d.getReservation().getDateFin().getTime()< (annee+1)*1000*3600*24*365.25){
@@ -97,9 +103,10 @@ public class ImplMetierRevenu implements InterfMetierRevenu{
 		return revenu;
 	}
 
-	/**Calcul le revenu total durant une annee**/
+	/**Calcul le revenu total durant une annee
+	 * @throws Exception **/
 	@Override
-	public Double revenuTotalParAnnee(Integer annee) {
+	public Double revenuTotalParAnnee(Integer annee) throws Exception {
 		Double revenu = revenuTotalReservationParAnnee(annee)+ revenuTotalProduitParAnnee(annee);
 		return revenu;
 	}

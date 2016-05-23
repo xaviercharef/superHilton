@@ -32,7 +32,7 @@ public class ImplMetierFacture implements InterfMetierFacture{
 	 }
 
 	 @Override
-	 public Facture getFacture(Long idFacture) {
+	 public Facture getFacture(Long idFacture) throws Exception {
 	  return daoFac.getFature(idFacture);
 	 }
 

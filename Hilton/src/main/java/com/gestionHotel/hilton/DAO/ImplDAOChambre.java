@@ -63,7 +63,6 @@ private EntityManager em ;
   return req.getResultList();
  }
 
- 
 @Override
 public List<Chambre> getAllChambre(){
 	Query req =em.createQuery("from Chambre c");
